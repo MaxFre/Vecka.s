@@ -211,6 +211,7 @@
     }
 
     .huvud {
+      grid-column: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -622,7 +623,7 @@
         padding: 1.5rem 0.75rem 4rem;
       }
       .annons-col { display: none; }
-      .huvud { align-items: stretch; }
+      .huvud { grid-column: 1 / -1; align-items: stretch; }
       .card, .annons-mellan, .cal-card { max-width: 100%; }
     }
   </style>
@@ -646,7 +647,7 @@
     <!-- Veckokortet -->
     <div class="card">
       <div class="sasong-bild">
-        <img id="sasong-img" src="" alt="" />
+        <img id="sasong-img" alt="" />
       </div>
       <h1 class="vecka-etikett">Vecka</h1>
       <p class="vecka-siffra" id="vecka-siffra"></p>
@@ -1086,32 +1087,39 @@
     return null;
   }
 
+  // Sätt sparat länsval synkront innan första render
   const sparatLan = localStorage.getItem('valt-lan');
   if (sparatLan) {
     const sel = document.getElementById('lan');
     if ([...sel.options].some(o => o.value === sparatLan)) {
       sel.value = sparatLan;
     }
-  } else {
-    fetch('https://ipapi.co/json/')
-      .then(r => r.json())
-      .then(data => {
-        if (data.country_code !== 'SE') return;
-        const lan = matchaLan(data.region || '');
-        if (!lan) return;
-        const sel = document.getElementById('lan');
-        sel.value = lan;
-        localStorage.setItem('valt-lan', lan);
-        ritar();
-      })
-      .catch(() => {});
   }
 
   document.getElementById('lan').addEventListener('change', () => {
     localStorage.setItem('valt-lan', document.getElementById('lan').value);
   });
 
+  // Rita sidan direkt – utan att vänta på API
   ritar();
+
+  // Geolokalisera via API först efter att allt är laddat, och bara om inget är sparat
+  if (!sparatLan) {
+    window.addEventListener('load', () => {
+      fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(data => {
+          if (data.country_code !== 'SE') return;
+          const lan = matchaLan(data.region || '');
+          if (!lan) return;
+          const sel = document.getElementById('lan');
+          sel.value = lan;
+          localStorage.setItem('valt-lan', lan);
+          ritar();
+        })
+        .catch(() => {});
+    });
+  }
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
