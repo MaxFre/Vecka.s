@@ -5,13 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vilken vecka är det? – Aktuellt veckonummer i Sverige | Vecka.se</title>
   <meta name="description" content="Se vilket veckonummer det är idag i Sverige. Kalender med röda dagar, skollov per län och svenska helgdagar – Vecka.se." />
-  <meta name="keywords" content="veckonummer, vilken vecka, vecka, kalender, skollov, röda dagar, Sverige" />
+  <meta name="keywords" content="veckonummer, vilken vecka, vecka, kalender, skollov, röda dagar, Sverige, vecka 2026" />
   <meta name="robots" content="index, follow" />
+  <meta name="author" content="Vecka.se" />
   <link rel="canonical" href="https://www.vecka.se/" />
+  <link rel="alternate" hreflang="sv" href="https://www.vecka.se/" />
+  <!-- Open Graph -->
   <meta property="og:title" content="Vilken vecka är det? – Vecka.se" />
   <meta property="og:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.vecka.se/" />
+  <meta property="og:locale" content="sv_SE" />
+  <meta property="og:site_name" content="Vecka.se" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Vilken vecka är det? – Vecka.se" />
+  <meta name="twitter:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län i Sverige." />
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.vecka.se/#website",
+        "url": "https://www.vecka.se/",
+        "name": "Vecka.se",
+        "description": "Aktuellt veckonummer, kalender med röda dagar och skollov för alla svenska län.",
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.vecka.se/#webpage",
+        "url": "https://www.vecka.se/",
+        "name": "Vilken vecka är det? – Aktuellt veckonummer i Sverige",
+        "isPartOf": { "@id": "https://www.vecka.se/#website" },
+        "description": "Se vilket veckonummer det är idag i Sverige med kalender, röda dagar och skollov per län."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Vilken vecka är det?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Veckonumret beräknas enligt ISO 8601-standarden. Veckan börjar på måndag och den första veckan på året är den som innehåller årets första torsdag. Vecka.se visar alltid aktuell vecka direkt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "När börjar och slutar en vecka i Sverige?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I Sverige börjar veckan på måndag och slutar på söndag, enligt ISO 8601-standarden som används i hela Norden."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur räknar man ut veckonumret?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Veckonumret räknas ut enligt ISO 8601: vecka 1 är den vecka som innehåller årets första torsdag. Ett år har 52 eller 53 veckor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "När är sportlovet 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sportlovet 2026 varierar efter län: norra Sverige (v.8), mellansverige (v.7) och södra Sverige (v.9). Välj ditt län i kalendervy för exakt datum."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vilka är de svenska helgdagarna?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sveriges helgdagar är: Nyårsdagen, Trettondedag jul, Långfredag, Påskdagen, Annandag påsk, Kristi himmelsfärdsdag, Pingstdagen, Nationaldagen (6 juni), Midsommardagen, Alla helgons dag, Juldagen och Annandag jul."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --bg:          #d6dcf5;
@@ -397,6 +475,55 @@
 
     [title] { cursor: help; }
 
+    /* FAQ-sektion */
+    .faq-sektion {
+      width: 100%;
+      max-width: 552px;
+    }
+    .faq-sektion h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      padding: 0.85rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.1rem;
+      color: var(--accent1);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p {
+      padding: 0 1.1rem 0.9rem;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
     /* Sidfot-nav */
     .sajt-footer {
       width: 100%;
@@ -487,7 +614,7 @@
       <div class="sasong-bild">
         <img id="sasong-img" src="" alt="" />
       </div>
-      <p class="vecka-etikett">Vecka</p>
+      <h1 class="vecka-etikett">Vecka</h1>
       <p class="vecka-siffra" id="vecka-siffra"></p>
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
@@ -553,6 +680,41 @@
         <span class="fk-item"><span class="prick prick-bla"></span>Idag</span>
       </div>
     </div>
+
+    <!-- FAQ-sektion -->
+    <section class="faq-sektion" aria-label="Vanliga frågor om veckonummer">
+      <h2>Vanliga frågor</h2>
+
+      <details class="faq-item">
+        <summary>Vilken vecka är det just nu?</summary>
+        <p>Aktuellt veckonummer visas löpande här på Vecka.se. Veckonumret beräknas enligt ISO 8601 – den standard som används i Sverige och hela Norden.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>När börjar och slutar en vecka i Sverige?</summary>
+        <p>I Sverige börjar veckan på <strong>måndag</strong> och slutar på <strong>söndag</strong>, enligt ISO 8601-standarden. Detta skiljer sig från t.ex. USA där veckan traditionellt börjar på söndag.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Hur räknar man ut veckonumret?</summary>
+        <p>Vecka 1 är alltid den vecka som innehåller årets första torsdag. Ett år har 52 eller 53 veckor. Om 1 januari infaller på en fredag, lördag eller söndag tillhör den föregående årets sista vecka.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>När är sportlovet 2026?</summary>
+        <p>Sportlovet 2026 ligger olika beroende på län: <strong>Norra Sverige</strong> (v.8, 16–20 feb), <strong>Mellansverige</strong> (v.7, 9–13 feb) och <strong>Södra Sverige</strong> (v.9, 23–27 feb). Välj ditt län i kalendern för att se exakta datum.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vilka är Sveriges röda dagar?</summary>
+        <p>Sveriges officiella helgdagar är: Nyårsdagen (1 jan), Trettondedag jul (6 jan), Långfredag, Påskdagen, Annandag påsk, Kristi himmelsfärdsdag, Pingstdagen, Nationaldagen (6 jun), Midsommardagen, Alla helgons dag, Juldagen (25 dec) och Annandag jul (26 dec). Alla dessa markeras automatiskt i kalendern på Vecka.se.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>När är påsklovet 2026?</summary>
+        <p>Påsklovet 2026 infaller vecka 14, med start 2 april och slut 9 april. Detta gäller för de flesta län men kan variera några dagar beroende på kommun.</p>
+      </details>
+    </section>
 
     <div class="sajt-footer">
       <nav>
