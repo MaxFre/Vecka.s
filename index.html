@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+  <link rel="preconnect" href="https://ipapi.co" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247" crossorigin="anonymous"></script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <title>Vilken vecka är det? – Aktuellt veckonummer i Sverige | VilketVeckonummer.se</title>
-  <meta name="description" content="Se vilket veckonummer det är idag i Sverige. Kalender med röda dagar, skollov per län och svenska helgdagar – VilketVeckonummer.se." />
-  <meta name="keywords" content="veckonummer, vilken vecka, vecka, kalender, skollov, röda dagar, Sverige, vecka 2026" />
+  <meta name="theme-color" content="#4f71f0" />
+  <title>Vilken vecka är det? – Veckonummer 2026 i Sverige | VilketVeckonummer.se</title>
+  <meta name="description" content="Vilket veckonummer är det idag 2026? Se aktuell vecka, kalender med röda dagar, skollov per län och alla svenska helgdagar. Uppdateras automatiskt – VilketVeckonummer.se." />
+  <meta name="keywords" content="veckonummer, vilken vecka är det, veckonummer 2026, aktuell vecka, kalender, skollov, röda dagar, Sverige, vecka idag, ISO 8601" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="VilketVeckonummer.se" />
+  <meta name="geo.region" content="SE" />
+  <meta name="geo.placename" content="Sverige" />
   <link rel="canonical" href="https://www.vilketveckonummer.se/" />
   <link rel="alternate" hreflang="sv" href="https://www.vilketveckonummer.se/" />
   <!-- Open Graph -->
@@ -17,6 +22,7 @@
   <meta property="og:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.vilketveckonummer.se/" />
+  <meta property="og:image" content="https://www.vilketveckonummer.se/favicon.svg" />
   <meta property="og:locale" content="sv_SE" />
   <meta property="og:site_name" content="VilketVeckonummer.se" />
   <!-- Twitter Card -->
@@ -40,9 +46,18 @@
         "@type": "WebPage",
         "@id": "https://www.vilketveckonummer.se/#webpage",
         "url": "https://www.vilketveckonummer.se/",
-        "name": "Vilken vecka är det? – Aktuellt veckonummer i Sverige",
+        "name": "Vilken vecka är det? – Veckonummer 2026 i Sverige",
         "isPartOf": { "@id": "https://www.vilketveckonummer.se/#website" },
-        "description": "Se vilket veckonummer det är idag i Sverige med kalender, röda dagar och skollov per län."
+        "description": "Se vilket veckonummer det är idag 2026 i Sverige med kalender, röda dagar och skollov per län.",
+        "datePublished": "2025-01-01",
+        "dateModified": "2026-02-24",
+        "inLanguage": "sv-SE",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://www.vilketveckonummer.se/" }
+          ]
+        }
       },
       {
         "@type": "FAQPage",
@@ -85,6 +100,22 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Sveriges helgdagar är: Nyårsdagen, Trettondedag jul, Långfredag, Påskdagen, Annandag påsk, Kristi himmelsfärdsdag, Pingstdagen, Nationaldagen (6 juni), Midsommardagen, Alla helgons dag, Juldagen och Annandag jul."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur många veckor är det år 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "År 2026 har 53 ISO-veckor. Vecka 53 börjar måndag 28 december 2026 och sträcker sig in i januari 2027."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vilken vecka börjar 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vecka 1 år 2026 börjar måndag 29 december 2025 och slutar söndag 4 januari 2026, eftersom vecka 1 alltid är den vecka som innehåller årets första torsdag (1 jan 2026)."
             }
           }
         ]
@@ -716,6 +747,16 @@
         <summary>När är påsklovet 2026?</summary>
         <p>Påsklovet 2026 infaller vecka 14, med start 2 april och slut 9 april. Detta gäller för de flesta län men kan variera några dagar beroende på kommun.</p>
       </details>
+
+      <details class="faq-item">
+        <summary>Hur många veckor är det år 2026?</summary>
+        <p>År 2026 innehåller <strong>53 ISO-veckor</strong>. Vecka 53 börjar måndag 28 december 2026 och sträcker sig in i januari 2027. Det händer de år då 1 januari infaller på en torsdag eller fredag.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vilken vecka börjar 2026?</summary>
+        <p>Vecka 1 år 2026 börjar <strong>måndag 29 december 2025</strong> och slutar söndag 4 januari 2026. Det beror på att vecka 1 alltid är den vecka som innehåller årets första torsdag – och den första torsdagen 2026 är 1 januari.</p>
+      </details>
     </section>
 
     <div class="sajt-footer">
@@ -741,6 +782,32 @@
 </div>
 
 <script>
+  // ── Sidvisningsräknare (per webbläsare/enhet) ────────────
+  (function () {
+    try {
+      const TOTAL   = 'vvn-tot';
+      const nu      = new Date();
+      const MANAD   = 'vvn-m-' + nu.getFullYear() + '-' + (nu.getMonth() + 1);
+
+      // Rensa gamla månadsnycklar för att hålla localStorage rent
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('vvn-m-') && k !== MANAD)
+        .forEach(k => localStorage.removeItem(k));
+
+      const totalt  = (parseInt(localStorage.getItem(TOTAL))  || 0) + 1;
+      const manaden = (parseInt(localStorage.getItem(MANAD)) || 0) + 1;
+      localStorage.setItem(TOTAL, totalt);
+      localStorage.setItem(MANAD, manaden);
+
+      const stil  = 'color:#4f71f0;font-weight:bold;font-size:13px';
+      const mNamn = nu.toLocaleDateString('sv-SE', { month: 'long', year: 'numeric' });
+      console.log('%c📊 VilketVeckonummer.se – sidvisningar (denna webbläsare)', stil);
+      console.log('  Totalt:      ' + totalt  + ' visning' + (totalt  !== 1 ? 'ar' : ''));
+      console.log('  ' + mNamn[0].toUpperCase() + mNamn.slice(1) + ': ' + manaden + ' visning' + (manaden !== 1 ? 'ar' : ''));
+      console.log('  (Per enhet/webbläsare – alla besökare syns i Vercel Analytics)');
+    } catch (e) {}
+  })();
+
   // ── Hjälpfunktioner ──────────────────────────────────────
   function isoVecka(date) {
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
