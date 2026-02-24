@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alla veckor – Veckonummer med datum | VilkenVecka.se</title>
+  <meta name="description" content="Lista över alla veckonummer 2025, 2026 och 2027 med exakta datum. Se vilka datum varje vecka infaller och när röda dagar är." />
+  <meta name="keywords" content="veckonummer 2026, alla veckor, vecka datum, v1 v2 v3, kalender Sverige" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.vilkenvecka.se/veckor/" />
+  <style>
+    :root {
+      --bg: #d6dcf5; --surface: rgba(255,255,255,0.80); --surface2: rgba(255,255,255,0.55);
+      --border: rgba(99,102,241,0.15); --text: #1e2250; --muted: #6470a0; --faded: #a0aac8;
+      --accent1: #4f71f0; --accent2: #a78bfa; --red: #e0394a; --green: #059669;
+      --today-bg: linear-gradient(135deg,#4f71f0,#a78bfa);
+      --card-shadow: 0 8px 32px rgba(79,113,240,0.12);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; background:var(--bg); color:var(--text);
+           font-family:'Segoe UI',system-ui,sans-serif; padding:2.5rem 1rem 5rem; }
+    .wrap { max-width:860px; margin:0 auto; }
+
+    /* Bakgrundsblobbar */
+    body::before, body::after {
+      content:''; position:fixed; border-radius:50%; filter:blur(90px); opacity:0.45; pointer-events:none; z-index:0;
+    }
+    body::before { width:500px; height:500px; background:radial-gradient(circle,#a5b4fc 0%,#c084fc 100%); top:-100px; left:-100px; }
+    body::after  { width:400px; height:400px; background:radial-gradient(circle,#7dd3fc 0%,#a5b4fc 100%); bottom:-80px; right:-80px; }
+
+    .huvud { position:relative; z-index:1; }
+
+    header { text-align:center; margin-bottom:2.5rem; }
+    header a { color:var(--accent1); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-bottom:0.75rem; }
+    header a:hover { text-decoration:underline; }
+    h1 { font-size:2rem; font-weight:900; margin-bottom:0.35rem; }
+    .ingress { font-size:0.95rem; color:var(--muted); line-height:1.6; max-width:560px; margin:0 auto; }
+
+    /* År-flikar */
+    .ar-flikar { display:flex; justify-content:center; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .ar-btn {
+      padding:0.4rem 1.2rem; border-radius:99px; border:2px solid var(--border);
+      background:var(--surface2); color:var(--muted); font-weight:700; font-size:0.85rem;
+      cursor:pointer; transition:all 0.15s; font-family:inherit;
+    }
+    .ar-btn.aktiv, .ar-btn:hover { background:var(--today-bg); color:#fff; border-color:transparent; }
+
+    /* Veckolista */
+    .vecko-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:0.75rem;
+    }
+    .vecko-kort {
+      background:var(--surface); border:1px solid var(--border); border-radius:1.1rem;
+      padding:0.9rem 1.1rem; transition:box-shadow 0.15s, transform 0.15s; cursor:default;
+      text-decoration:none; display:block; color:inherit;
+    }
+    .vecko-kort:hover { box-shadow:0 6px 24px rgba(79,113,240,0.16); transform:translateY(-2px); }
+    .vecko-kort.nu { border-color:var(--accent1); box-shadow:0 0 0 2px rgba(79,113,240,0.18); }
+    .vecko-kort-topp { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:0.25rem; }
+    .vecko-nr { font-size:1.5rem; font-weight:900; background:var(--today-bg); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .vecko-ar { font-size:0.7rem; color:var(--faded); font-weight:700; }
+    .vecko-datum { font-size:0.78rem; color:var(--muted); font-weight:500; margin-bottom:0.4rem; }
+    .vecko-helgdagar { display:flex; flex-wrap:wrap; gap:0.3rem; }
+    .hdag-badge {
+      font-size:0.65rem; font-weight:700; padding:0.1rem 0.45rem;
+      border-radius:99px; white-space:nowrap;
+    }
+    .hdag-badge.rod   { background:rgba(224,57,74,0.1);  color:var(--red); }
+    .hdag-badge.lov   { background:rgba(5,150,105,0.1);  color:var(--green); }
+    .hdag-badge.nu-badge { background:rgba(79,113,240,0.12); color:var(--accent1); }
+
+    footer { text-align:center; margin-top:2.5rem; font-size:0.68rem; color:var(--faded); position:relative; z-index:1; }
+    footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem 1rem; margin-bottom:0.4rem; }
+    footer nav a { color:var(--muted); font-weight:600; text-decoration:none; font-size:0.72rem; }
+    footer nav a:hover { color:var(--accent1); }
+    @media(max-width:600px){ h1 { font-size:1.5rem; } .vecko-grid { grid-template-columns:1fr 1fr; } }
+  </style>
+</head>
+<body>
+<div class="wrap huvud">
+  <header>
+    <a href="../index.html">← Tillbaka till startsidan</a>
+    <h1>Alla veckor</h1>
+    <p class="ingress" id="ingress-text"></p>
+  </header>
+
+  <div class="ar-flikar" id="ar-flikar"></div>
+  <div class="vecko-grid" id="vecko-grid"></div>
+
+  <footer>
+    <nav>
+      <a href="../index.html">Startsidan</a>
+      <a href="../om-oss.html">Om sajten</a>
+      <a href="../kontakt.html">Kontakt</a>
+      <a href="../integritetspolicy.html">Integritetspolicy</a>
+    </nav>
+    <p>&copy; <span id="ar-footer"></span> VilkenVecka.se</p>
+  </footer>
+</div>
+
+<script>
+  const MANAD = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+  const MANAD_LANG = ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+
+  function isoVecka(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dag = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dag);
+    const jan1 = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - jan1) / 86400000) + 1) / 7);
+  }
+  function isoVeckaAr(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dag = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dag);
+    return d.getUTCFullYear();
+  }
+  function pask(year) {
+    const a=year%19,b=Math.floor(year/100),c=year%100,dd=Math.floor(b/4),e=b%4,
+          f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-dd-g+15)%30,
+          i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,
+          mv=Math.floor((a+11*h+22*l)/451),
+          month=Math.floor((h+l-7*mv+114)/31)-1,day=((h+l-7*mv+114)%31)+1;
+    return new Date(year,month,day);
+  }
+  function dk(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+
+  function helgdagar(year) {
+    const h={};
+    const add=(d,n)=>h[dk(d)]=n;
+    const fast=(m,d,n)=>add(new Date(year,m,d),n);
+    fast(0,1,'Nyårsdagen');fast(0,6,'Trettondedag jul');
+    fast(4,1,'Första maj');fast(5,6,'Nationaldag');
+    fast(11,25,'Juldagen');fast(11,26,'Annandag jul');
+    const e=pask(year);
+    [[-2,'Långfredag'],[0,'Påskdagen'],[1,'Annandag påsk'],[39,'Kristi himmelsfärd'],[49,'Pingstdagen']].forEach(([o,n])=>{
+      const d=new Date(e); d.setDate(d.getDate()+o); add(d,n);
+    });
+    const mid=new Date(year,5,20); while(mid.getDay()!==6)mid.setDate(mid.getDate()+1); add(mid,'Midsommardagen');
+    const ah=new Date(year,9,31);  while(ah.getDay()!==6) ah.setDate(ah.getDate()+1); add(ah,'Alla helgons dag');
+    return h;
+  }
+
+  // Generera alla veckor för ett givet år
+  function veckorForAr(ar) {
+    const hols = Object.assign({}, helgdagar(ar-1), helgdagar(ar), helgdagar(ar+1));
+    const veckor = [];
+    // Hitta måndag i vecka 1: den 4 jan ligger alltid i vecka 1
+    const v1 = new Date(ar, 0, 4);
+    const dagISV = (v1.getDay() || 7) - 1;
+    v1.setDate(v1.getDate() - dagISV);
+    let cursor = new Date(v1);
+    while (true) {
+      const vkNr = isoVecka(cursor);
+      const vkAr = isoVeckaAr(cursor);
+      if (vkAr > ar) break;
+      const slut = new Date(cursor); slut.setDate(slut.getDate() + 6);
+      // Helgdagar denna vecka
+      const hdagar = [];
+      for (let i=0;i<7;i++) {
+        const d = new Date(cursor); d.setDate(d.getDate()+i);
+        const key = dk(d);
+        if (hols[key]) hdagar.push(hols[key]);
+      }
+      veckor.push({ vk: vkNr, ar: vkAr, start: new Date(cursor), slut, hdagar });
+      cursor.setDate(cursor.getDate() + 7);
+    }
+    return veckor;
+  }
+
+  const nu = new Date();
+  const nuVk = isoVecka(nu);
+  const nuVkAr = isoVeckaAr(nu);
+
+  document.getElementById('ar-footer').textContent = nu.getFullYear();
+
+  const arenArr = [nu.getFullYear()-1, nu.getFullYear(), nu.getFullYear()+1];
+  let valdAr = nu.getFullYear();
+
+  const flikar = document.getElementById('ar-flikar');
+  const grid   = document.getElementById('vecko-grid');
+  const ingress = document.getElementById('ingress-text');
+
+  arenArr.forEach(ar => {
+    const btn = document.createElement('button');
+    btn.className = 'ar-btn' + (ar===valdAr?' aktiv':'');
+    btn.textContent = ar;
+    btn.addEventListener('click', () => {
+      valdAr = ar;
+      document.querySelectorAll('.ar-btn').forEach(b=>b.classList.remove('aktiv'));
+      btn.classList.add('aktiv');
+      renderVeckor();
+    });
+    flikar.appendChild(btn);
+  });
+
+  function renderVeckor() {
+    grid.innerHTML = '';
+    const veckor = veckorForAr(valdAr);
+    const hols = Object.assign({}, helgdagar(valdAr-1), helgdagar(valdAr), helgdagar(valdAr+1));
+    ingress.textContent = `${veckor.length} veckor under ${valdAr} – klicka på en vecka för att gå till kalender.`;
+
+    veckor.forEach(v => {
+      const erNu = v.vk===nuVk && v.ar===nuVkAr;
+      const a = document.createElement('a');
+      a.className = 'vecko-kort' + (erNu?' nu':'');
+      a.href = `../?v=${v.vk}&ar=${v.ar}`;
+      a.title = `Vecka ${v.vk}, ${v.ar}`;
+
+      const startStr = `${v.start.getDate()} ${MANAD[v.start.getMonth()]}`;
+      const slutStr  = `${v.slut.getDate()} ${MANAD[v.slut.getMonth()]}`;
+      const arStr    = v.start.getFullYear() !== v.slut.getFullYear()
+        ? `${v.start.getFullYear()}–${v.slut.getFullYear()}`
+        : `${v.slut.getFullYear()}`;
+
+      let html = `<div class="vecko-kort-topp"><span class="vecko-nr">v${v.vk}</span><span class="vecko-ar">${arStr}</span></div>`;
+      html += `<div class="vecko-datum">${startStr} – ${slutStr}</div>`;
+      html += `<div class="vecko-helgdagar">`;
+      if (erNu) html += `<span class="hdag-badge nu-badge">Denna vecka</span>`;
+      v.hdagar.forEach(n => { html += `<span class="hdag-badge rod">${n}</span>`; });
+      html += `</div>`;
+      a.innerHTML = html;
+      grid.appendChild(a);
+    });
+  }
+
+  renderVeckor();
+</script>
+</body>
+</html>

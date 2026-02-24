@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Om sajten – VilkenVecka.se</title>
+  <meta name="description" content="Om VilkenVecka.se – en snabb och enkel sajt för att se aktuellt veckonummer, kalender med röda dagar och skollov per län i Sverige." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.vilkenvecka.se/om-oss.html" />
+  <style>
+    :root {
+      --bg: #d6dcf5; --surface: rgba(255,255,255,0.80); --border: rgba(99,102,241,0.15);
+      --text: #1e2250; --muted: #6470a0; --faded: #a0aac8;
+      --accent1: #4f71f0; --accent2: #a78bfa; --card-shadow: 0 8px 32px rgba(79,113,240,0.12);
+      --today-bg: linear-gradient(135deg,#4f71f0,#a78bfa);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; background:var(--bg); color:var(--text);
+           font-family:'Segoe UI',system-ui,sans-serif; padding:2.5rem 1rem 5rem; }
+    .wrap { max-width:720px; margin:0 auto; }
+    header { text-align:center; margin-bottom:2.5rem; }
+    header a.tillbaka { color:var(--accent1); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-bottom:0.75rem; }
+    header a.tillbaka:hover { text-decoration:underline; }
+    h1 { font-size:2rem; font-weight:900; margin-bottom:0.3rem; }
+    .ingress { font-size:1rem; color:var(--muted); line-height:1.6; max-width:560px; margin:0 auto; }
+    .card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:1.5rem; box-shadow:var(--card-shadow);
+      padding:2rem 2.5rem; display:flex; flex-direction:column; gap:1.5rem;
+      margin-bottom:1.5rem;
+    }
+    .funktioner {
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:1rem;
+    }
+    .funk-item {
+      background:rgba(79,113,240,0.06); border:1px solid var(--border);
+      border-radius:1rem; padding:1rem 1.2rem;
+    }
+    .funk-item h3 { font-size:0.9rem; font-weight:800; margin-bottom:0.3rem; }
+    .funk-item p { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+    section h2 { font-size:1.1rem; font-weight:800; margin-bottom:0.5rem; }
+    section p { font-size:0.9rem; line-height:1.7; }
+    a { color:var(--accent1); }
+    footer { text-align:center; margin-top:2rem; font-size:0.68rem; color:var(--faded); }
+    footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem 1rem; margin-bottom:0.4rem; }
+    footer nav a { color:var(--muted); font-weight:600; text-decoration:none; font-size:0.72rem; }
+    footer nav a:hover { color:var(--accent1); }
+    @media(max-width:600px){ .card { padding:1.5rem 1.2rem; } h1 { font-size:1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="tillbaka" href="index.html">← Tillbaka till startsidan</a>
+    <h1>Om VilkenVecka.se</h1>
+    <p class="ingress">En snabb och enkel sajt för att alltid ha koll på veckonumret, svenska helgdagar och skollov.</p>
+  </header>
+
+  <div class="card">
+    <section>
+      <h2>Vad är VilkenVecka.se?</h2>
+      <p>VilkenVecka.se är en gratis webbtjänst som visar aktuellt veckonummer enligt ISO 8601-standarden – den standard som används i Sverige och Norden. Sajten laddar snabbt, kräver ingen inloggning och sparar inga personuppgifter.</p>
+    </section>
+
+    <section>
+      <h2>Funktioner</h2>
+      <div class="funktioner">
+        <div class="funk-item">
+          <h3>📅 Veckonummer</h3>
+          <p>Visar aktuell vecka med ISO-veckonummer direkt på startsidan.</p>
+        </div>
+        <div class="funk-item">
+          <h3>🗓️ Kalender</h3>
+          <p>Månadskalender med veckodagar, veckonummer och möjlighet att bläddra framåt och bakåt.</p>
+        </div>
+        <div class="funk-item">
+          <h3>🔴 Röda dagar</h3>
+          <p>Alla svenska helgdagar markeras automatiskt, inklusive rörliga helger som påsk och midsommar.</p>
+        </div>
+        <div class="funk-item">
+          <h3>🟢 Skollov</h3>
+          <p>Välj ditt län för att se höstlov, jullov, sportlov, påsklov och sommarlov markerade i kalendern.</p>
+        </div>
+        <div class="funk-item">
+          <h3>📍 Autolän</h3>
+          <p>Sajten försöker automatiskt förinställa ditt läns skollov baserat på din plats.</p>
+        </div>
+        <div class="funk-item">
+          <h3>🌿 Årstidsbild</h3>
+          <p>En bild som växlar automatiskt med årstiden – vinter, vår, sommar och höst.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Teknik</h2>
+      <p>Sajten är byggd med ren HTML, CSS och JavaScript – utan ramverk. Det gör laddningstiden minimal och sajten fungerar utan en server. Lovdatum är ingbyggda i koden och kan variera lite beroende på kommun.</p>
+    </section>
+  </div>
+
+  <footer>
+    <nav>
+      <a href="index.html">Startsidan</a>
+      <a href="veckor/index.html">Alla veckor</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="integritetspolicy.html">Integritetspolicy</a>
+    </nav>
+    <p>&copy; <span id="ar"></span> VilkenVecka.se</p>
+  </footer>
+</div>
+<script>document.getElementById('ar').textContent=new Date().getFullYear();</script>
+</body>
+</html>

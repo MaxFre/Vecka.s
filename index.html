@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vilken vecka är det? – Aktuellt veckonummer i Sverige</title>
+  <meta name="description" content="Se vilket veckonummer det är idag i Sverige. Kalender med röda dagar, skollov per län och svenska helgdagar." />
+  <meta name="keywords" content="veckonummer, vilken vecka, vecka, kalender, skollov, röda dagar, Sverige" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.vilkenvecka.se/" />
+  <meta property="og:title" content="Vilken vecka är det?" />
+  <meta property="og:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.vilkenvecka.se/" />
+  <style>
+    :root {
+      --bg:          #d6dcf5;
+      --surface:     rgba(255,255,255,0.75);
+      --surface2:    rgba(255,255,255,0.55);
+      --border:      rgba(99,102,241,0.15);
+      --text:        #1e2250;
+      --muted:       #6470a0;
+      --faded:       #a0aac8;
+      --accent1:     #4f71f0;
+      --accent2:     #a78bfa;
+      --red:         #e0394a;
+      --red-light:   rgba(224,57,74,0.1);
+      --red-faded:   rgba(224,57,74,0.18);
+      --green:       #059669;
+      --green-bg:    rgba(5,150,105,0.1);
+      --green-faded: rgba(5,150,105,0.04);
+      --today-bg:    linear-gradient(135deg,#4f71f0,#a78bfa);
+      --card-shadow: 0 8px 32px rgba(79,113,240,0.12), 0 1px 0 rgba(255,255,255,0.9) inset;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    @keyframes blob-drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(60px,-40px) scale(1.15); }
+      66%      { transform: translate(-40px,60px) scale(0.9); }
+    }
+    @keyframes blob-drift2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(-70px,50px) scale(1.1); }
+      66%      { transform: translate(50px,-60px) scale(0.95); }
+    }
+    @keyframes fade-up {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%,100% { text-shadow: 0 0 0px transparent; }
+      50%      { text-shadow: 0 0 40px rgba(96,165,250,0.35); }
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Animerade bakgrundsblobbar */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #a5b4fc 0%, #c084fc 100%);
+      top: -150px; left: -150px;
+      animation: blob-drift 14s ease-in-out infinite;
+    }
+    body::after {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #7dd3fc 0%, #a5b4fc 100%);
+      bottom: -100px; right: -100px;
+      animation: blob-drift2 18s ease-in-out infinite;
+    }
+
+    /* ── Sidalayout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 160px 1fr 160px;
+      grid-template-rows: auto;
+      gap: 0 1.25rem;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 5rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .huvud {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* Annonskolumner */
+    .annons-col {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .annons-yta {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px dashed var(--border);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--faded);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 0.4rem;
+    }
+    .annons-yta .annons-ikon {
+      font-size: 1.4rem;
+      opacity: 0.4;
+    }
+    .annons-sky  { width: 160px; height: 600px; }
+    .annons-band { width: 100%; height: 90px; border-radius: 0.9rem; flex-direction: row; gap: 0.6rem; }
+
+    /* ── Veckokortet ── */
+    .card {
+      width: 100%;
+      max-width: 552px;
+      text-align: center;
+      padding: 0 3rem 2.1rem;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 1.75rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      animation: fade-up 0.55s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .sasong-bild {
+      margin: 0 -3rem 1.5rem -3rem;
+      position: relative;
+    }
+    .sasong-bild img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.4s;
+    }
+    .sasong-bild::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(214,220,245,0.6) 100%);
+      pointer-events: none;
+    }
+
+    .vecka-etikett {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .vecka-siffra {
+      font-size: 8.4rem;
+      font-weight: 900;
+      line-height: 1;
+      background: var(--today-bg);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .vecka-datum {
+      margin-top: 0.7rem;
+      font-size: 1.14rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .vecka-lov-banner {
+      margin-top: 0.65rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-bg);
+      border: 1px solid rgba(5,150,105,0.2);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+    }
+    .vecka-lov-banner.dold { display: none; }
+
+    /* ── Annonsband (mellanrum) ── */
+    .annons-mellan {
+      width: 100%;
+      max-width: 552px;
+    }
+
+    /* ── Kalenderkort ── */
+    .cal-card {
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 1.75rem;
+      box-shadow: var(--card-shadow);
+      padding: 1.7rem 1.9rem 1.9rem;
+      width: 100%;
+      max-width: 552px;
+      position: relative;
+      overflow: hidden;
+      animation: fade-up 0.65s 0.1s cubic-bezier(.22,1,.36,1) both;
+    }
+    .cal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--today-bg);
+      border-radius: 1.75rem 1.75rem 0 0;
+    }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .cal-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: capitalize;
+      color: var(--text);
+    }
+
+    .cal-nav {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 0.55rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+    .cal-nav:hover {
+      background: var(--accent1);
+      border-color: var(--accent1);
+      color: #fff;
+    }
+
+    /* länsdropdown */
+    .lans-rad {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 0.4rem 0.7rem;
+    }
+    .lans-rad label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .lans-val {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+    .lans-val option { background: #eef2ff; color: #1e2250; }
+
+    /* rutnät */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: 2.65rem repeat(7, 1fr);
+      gap: 3px;
+    }
+
+    .cal-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.7rem;
+      font-size: 0.97rem;
+      border-radius: 0.6rem;
+      position: relative;
+      transition: background 0.1s;
+    }
+
+    /* veckodagsrubriker */
+    .cal-cell.vd {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      height: 2rem;
+      text-transform: uppercase;
+    }
+    .cal-cell.vd.son { color: var(--red); }
+
+    /* veckonummer */
+    .cal-cell.vk {
+      color: var(--faded);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      border-radius: 0.4rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cal-cell.vk.nu { color: var(--accent1); background: rgba(37,99,235,0.07); }
+    .cal-cell.vk.lov-vk { color: var(--green); background: rgba(5,150,105,0.1); }
+    .cal-cell.vk.nu.lov-vk { color: var(--accent1); background: rgba(37,99,235,0.07); }
+
+    /* hörn */
+    .cal-cell.horn {
+      font-size: 0.72rem;
+      color: var(--faded);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* dag */
+    .cal-cell.dag        { color: var(--faded); font-weight: 500; }
+    .cal-cell.dag.inne   { color: var(--text); font-weight: 500; }
+    .cal-cell.dag.inn.inne:hover { background: var(--surface2); }
+    .cal-cell.dag.rod    { color: var(--red); font-weight: 600; }
+    .cal-cell.dag.rod.tonad { color: var(--red-faded); }
+    .cal-cell.dag.tonad  { color: var(--faded); }
+
+    /* skollov */
+    .cal-cell.dag.lov       { background: var(--green-bg); }
+    .cal-cell.dag.lov.tonad { background: var(--green-faded); }
+    .cal-cell.dag.lov::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.8;
+    }
+
+    /* idag */
+    .cal-cell.dag.idag {
+      background: var(--today-bg) !important;
+      color: #fff !important;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+    }
+    .cal-cell.dag.idag::after { display: none; }
+
+    [title] { cursor: help; }
+
+    /* Sidfot-nav */
+    .sajt-footer {
+      width: 100%;
+      max-width: 552px;
+      text-align: center;
+    }
+    .sajt-footer nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.3rem 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .sajt-footer nav a {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .sajt-footer nav a:hover { color: var(--accent1); }
+    .sajt-footer p {
+      font-size: 0.62rem;
+      color: var(--faded);
+    }
+
+    /* förklaring */
+    .forklaring {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      justify-content: center;
+    }
+    .fk-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .prick {
+      width: 0.5rem; height: 0.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .prick-rod  { background: var(--red); }
+    .prick-gron { background: var(--green); }
+    .prick-bla  { background: var(--accent1); }
+
+    footer {
+      font-size: 0.66rem;
+      color: var(--faded);
+      text-align: center;
+    }
+
+    /* Responsivt – dölj sidoannonser på smala skärmar */
+    @media (max-width: 780px) {
+      .layout {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 0.75rem 4rem;
+      }
+      .annons-col { display: none; }
+      .huvud { align-items: stretch; }
+      .card, .annons-mellan, .cal-card { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Vänster annons -->
+  <aside class="annons-col">
+    <div class="annons-yta annons-sky">
+      <span class="annons-ikon">📢</span>
+      <span>Annons</span>
+      <span style="font-size:0.6rem;opacity:0.6">160 × 600</span>
+    </div>
+  </aside>
+
+  <!-- Huvudinnehåll -->
+  <main class="huvud">
+
+    <!-- Veckokortet -->
+    <div class="card">
+      <div class="sasong-bild">
+        <img id="sasong-img" src="" alt="" />
+      </div>
+      <p class="vecka-etikett">Vecka</p>
+      <p class="vecka-siffra" id="vecka-siffra"></p>
+      <p class="vecka-datum"  id="vecka-datum"></p>
+      <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
+    </div>
+
+    <!-- Annonsband -->
+    <div class="annons-mellan">
+      <div class="annons-yta annons-band">
+        <span class="annons-ikon">📢</span>
+        <span>Annons — 468 × 90</span>
+      </div>
+    </div>
+
+    <!-- Kalender -->
+    <div class="cal-card">
+      <div class="cal-header">
+        <button class="cal-nav" id="prev" title="Föregående månad">&#8592;</button>
+        <span class="cal-title" id="cal-title"></span>
+        <button class="cal-nav" id="next" title="Nästa månad">&#8594;</button>
+      </div>
+
+      <div class="lans-rad">
+        <label for="lan">Länslov:</label>
+        <select class="lans-val" id="lan">
+          <option value="">— Inget valt —</option>
+          <optgroup label="Norrland">
+            <option value="norrbotten">Norrbottens län</option>
+            <option value="vasterbotten">Västerbottens län</option>
+            <option value="vasternorrland">Västernorrlands län</option>
+            <option value="jamtland">Jämtlands län</option>
+          </optgroup>
+          <optgroup label="Mellansverige">
+            <option value="gavleborg">Gävleborgs län</option>
+            <option value="dalarna">Dalarnas län</option>
+            <option value="varmland">Värmlands län</option>
+            <option value="orebro">Örebro län</option>
+            <option value="vastmanland">Västmanlands län</option>
+            <option value="uppsala">Uppsala län</option>
+            <option value="stockholm">Stockholms län</option>
+            <option value="sodermanland">Södermanlands län</option>
+          </optgroup>
+          <optgroup label="Östsverige">
+            <option value="ostergotland">Östergötlands län</option>
+            <option value="jonkoping">Jönköpings län</option>
+            <option value="kalmar">Kalmar län</option>
+            <option value="gotland">Gotlands län</option>
+          </optgroup>
+          <optgroup label="Sydsverige">
+            <option value="blekinge">Blekinge län</option>
+            <option value="kronoberg">Kronobergs län</option>
+            <option value="skane">Skåne län</option>
+            <option value="halland">Hallands län</option>
+            <option value="vastragotaland">Västra Götalands län</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="cal-grid" id="cal-grid"></div>
+
+      <div class="forklaring">
+        <span class="fk-item"><span class="prick prick-rod"></span>Röd dag / söndag</span>
+        <span class="fk-item"><span class="prick prick-gron"></span>Skollov (valt län)</span>
+        <span class="fk-item"><span class="prick prick-bla"></span>Idag</span>
+      </div>
+    </div>
+
+    <div class="sajt-footer">
+      <nav>
+        <a href="veckor/index.html">Alla veckor</a>
+        <a href="om-oss.html">Om sajten</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="integritetspolicy.html">Integritetspolicy</a>
+      </nav>
+      <p>Lovdatum är ungefärliga och kan variera per kommun. &copy; <span id="ar"></span> VilkenVecka.se</p>
+    </div>
+  </main>
+
+  <!-- Höger annons -->
+  <aside class="annons-col">
+    <div class="annons-yta annons-sky">
+      <span class="annons-ikon">📢</span>
+      <span>Annons</span>
+      <span style="font-size:0.6rem;opacity:0.6">160 × 600</span>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // ── Hjälpfunktioner ──────────────────────────────────────
+  function isoVecka(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dag = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dag);
+    const jan1 = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - jan1) / 86400000) + 1) / 7);
+  }
+
+  function isoVeckaAr(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dag = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dag);
+    return d.getUTCFullYear();
+  }
+
+  function datumNyckel(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function laggTillDagar(date, n) {
+    const d = new Date(date); d.setDate(d.getDate() + n); return d;
+  }
+
+  // Påsk (Meeus/Jones/Butcher)
+  function pask(year) {
+    const a=year%19,b=Math.floor(year/100),c=year%100,
+          dd=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),
+          g=Math.floor((b-f+1)/3),h=(19*a+b-dd-g+15)%30,
+          i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,
+          mv=Math.floor((a+11*h+22*l)/451),
+          month=Math.floor((h+l-7*mv+114)/31)-1,
+          day=((h+l-7*mv+114)%31)+1;
+    return new Date(year,month,day);
+  }
+
+  // Svenska helgdagar
+  function helgdagar(year) {
+    const h = {};
+    const add = (date, namn) =>
+      h[datumNyckel(date.getFullYear(), date.getMonth(), date.getDate())] = namn;
+    const fast = (m, d, namn) => add(new Date(year, m, d), namn);
+    fast(0,1,'Nyårsdagen'); fast(0,6,'Trettondedag jul');
+    fast(4,1,'Första maj'); fast(5,6,'Sveriges nationaldag');
+    fast(11,25,'Juldagen'); fast(11,26,'Annandag jul');
+    const e = pask(year);
+    [[-2,'Långfredag'],[0,'Påskdagen'],[1,'Annandag påsk'],
+     [39,'Kristi himmelsfärdsdag'],[49,'Pingstdagen']].forEach(([off,namn]) =>
+      add(laggTillDagar(e,off),namn));
+    const mid = new Date(year,5,20);
+    while (mid.getDay()!==6) mid.setDate(mid.getDate()+1);
+    add(mid,'Midsommardagen');
+    const ah = new Date(year,9,31);
+    while (ah.getDay()!==6) ah.setDate(ah.getDate()+1);
+    add(ah,'Alla helgons dag');
+    return h;
+  }
+
+  // ── Skollovdata ──────────────────────────────────────────
+  function lovPerioder(sportVecka) {
+    const sport = {
+      v7:{ from:[2026,1,9],  to:[2026,1,13] },
+      v8:{ from:[2026,1,16], to:[2026,1,20] },
+      v9:{ from:[2026,1,23], to:[2026,1,27] },
+    }[sportVecka];
+    return [
+      { namn:'Höstlov 2025',              from:[2025,9,27],  to:[2025,9,31]  },
+      { namn:'Jullov 2025–2026',          from:[2025,11,20], to:[2026,0,7]   },
+      { namn:`Sportlov 2026 (${sportVecka})`, from:sport.from, to:sport.to   },
+      { namn:'Påsklov 2026',              from:[2026,3,2],   to:[2026,3,9]   },
+      { namn:'Sommarlov 2026',            from:[2026,5,11],  to:[2026,7,16]  },
+      { namn:'Höstlov 2026',              from:[2026,9,26],  to:[2026,9,30]  },
+    ];
+  }
+
+  const SKOLLOV = {
+    norrbotten:'v8', vasterbotten:'v8', vasternorrland:'v8', jamtland:'v8',
+    gavleborg:'v8',  dalarna:'v8',
+    varmland:'v7',   orebro:'v7', vastmanland:'v7', stockholm:'v7',
+    uppsala:'v7',    sodermanland:'v7', ostergotland:'v7', jonkoping:'v7',
+    kalmar:'v7',     gotland:'v7',
+    blekinge:'v9',   kronoberg:'v9', skane:'v9', halland:'v9', vastragotaland:'v9',
+  };
+
+  function byggLovSet(lansNyckel) {
+    const result = {};
+    if (!lansNyckel) return result;
+    lovPerioder(SKOLLOV[lansNyckel]).forEach(({ namn, from, to }) => {
+      const start = new Date(from[0],from[1],from[2]);
+      const slut  = new Date(to[0],  to[1],  to[2]);
+      for (const d = new Date(start); d <= slut; d.setDate(d.getDate()+1))
+        result[datumNyckel(d.getFullYear(),d.getMonth(),d.getDate())] = namn;
+    });
+    return result;
+  }
+
+  // Hitta lovnamnet för en vecka (returnerar första hittade lovnamn den veckan)
+  function lovNamnForVecka(vkDat, lovSet) {
+    for (let i = 0; i < 7; i++) {
+      const d = laggTillDagar(vkDat, i);
+      const nyckel = datumNyckel(d.getFullYear(), d.getMonth(), d.getDate());
+      if (lovSet[nyckel]) return lovSet[nyckel];
+    }
+    return null;
+  }
+
+  // ── Init ────────────────────────────────────────────────
+  const DAGNAMN   = ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+  const MANADNAMN = ['januari','februari','mars','april','maj','juni',
+                     'juli','augusti','september','oktober','november','december'];
+  const SASONG     = { 0:'vinter',1:'vinter',2:'spring',3:'spring',4:'spring',
+                       5:'summer',6:'summer',7:'summer',8:'fall',9:'fall',10:'fall',11:'vinter' };
+  const SASONG_ALT = { vinter:'Vinter', spring:'Vår', summer:'Sommar', fall:'Höst' };
+  const imgEl      = document.getElementById('sasong-img');
+
+  let nu, idag, idagNyckel;
+
+  function setDatum(datum) {
+    nu          = datum;
+    idag        = { y:nu.getFullYear(), m:nu.getMonth(), d:nu.getDate() };
+    idagNyckel  = datumNyckel(idag.y, idag.m, idag.d);
+
+    document.getElementById('vecka-siffra').textContent = isoVecka(nu);
+    document.getElementById('vecka-datum').textContent  =
+      `${DAGNAMN[nu.getDay()]} ${idag.d} ${MANADNAMN[idag.m]} ${idag.y}`;
+
+    const bildNamn = SASONG[idag.m];
+    imgEl.src = `images/${bildNamn}.png`;
+    imgEl.alt = SASONG_ALT[bildNamn];
+  }
+
+  setDatum(new Date());
+
+  function uppdateraBanner(lovSet) {
+    const banner  = document.getElementById('vecka-lov-banner');
+    const namnEl  = document.getElementById('vecka-lov-namn');
+    const vkStart = new Date(idag.y, idag.m, idag.d);
+    // Gå till måndagen denna vecka
+    const dagISV = (vkStart.getDay() || 7) - 1;
+    vkStart.setDate(vkStart.getDate() - dagISV);
+    const lov = lovNamnForVecka(vkStart, lovSet);
+    if (lov) {
+      namnEl.textContent = lov;
+      banner.classList.remove('dold');
+    } else {
+      banner.classList.add('dold');
+    }
+  }
+
+  let kalAr = new Date().getFullYear(), kalMan = new Date().getMonth();
+
+  function ritar() {
+    const grid   = document.getElementById('cal-grid');
+    const rubrik = document.getElementById('cal-title');
+    grid.innerHTML = '';
+
+    const hols = Object.assign({},
+      helgdagar(kalAr-1), helgdagar(kalAr), helgdagar(kalAr+1));
+    const lovSet = byggLovSet(document.getElementById('lan').value);
+
+    uppdateraBanner(lovSet);
+
+    rubrik.textContent = `${MANADNAMN[kalMan]} ${kalAr}`;
+
+    const nuVecka   = isoVecka(nu);
+    const nuVeckaAr = isoVeckaAr(nu);
+
+    // Rubrikrad
+    const horn = document.createElement('div');
+    horn.className = 'cal-cell horn'; horn.textContent = 'v.';
+    grid.appendChild(horn);
+
+    ['Mån','Tis','Ons','Tor','Fre','Lör','Sön'].forEach((lbl,i) => {
+      const c = document.createElement('div');
+      c.className = 'cal-cell vd' + (i===6?' son':'');
+      c.textContent = lbl;
+      grid.appendChild(c);
+    });
+
+    // Dagceller
+    const forstaISO   = (new Date(kalAr,kalMan,1).getDay()||7);
+    const dagarIManed = new Date(kalAr,kalMan+1,0).getDate();
+    const dagarIForra = new Date(kalAr,kalMan,0).getDate();
+
+    const celler = [];
+    for (let i=forstaISO-1;i>0;i--) {
+      const pm=kalMan===0?11:kalMan-1, py=kalMan===0?kalAr-1:kalAr;
+      celler.push({y:py,m:pm,d:dagarIForra-i+1,inne:false});
+    }
+    for (let d=1;d<=dagarIManed;d++) celler.push({y:kalAr,m:kalMan,d,inne:true});
+    const rest=(7-(celler.length%7))%7;
+    for (let d=1;d<=rest;d++) {
+      const nm=kalMan===11?0:kalMan+1, ny=kalMan===11?kalAr+1:kalAr;
+      celler.push({y:ny,m:nm,d,inne:false});
+    }
+
+    celler.forEach((cell,i) => {
+      if (i%7===0) {
+        const vkDat  = new Date(cell.y,cell.m,cell.d);
+        const vk     = isoVecka(vkDat);
+        const vkAr   = isoVeckaAr(vkDat);
+        const arNu   = vk===nuVecka && vkAr===nuVeckaAr;
+        const lovNmn = lovNamnForVecka(vkDat, lovSet);
+        const vkEl   = document.createElement('div');
+        let vkCls    = 'cal-cell vk';
+        if (arNu)   vkCls += ' nu';
+        if (lovNmn) vkCls += ' lov-vk';
+        vkEl.className   = vkCls;
+        vkEl.textContent = vk;
+        if (lovNmn) vkEl.title = lovNmn;
+        grid.appendChild(vkEl);
+      }
+
+      const {y,m,d} = cell;
+      const dato    = new Date(y,m,d);
+      const nyckel  = datumNyckel(y,m,d);
+      const arSon   = dato.getDay()===0;
+      const helgdag = hols[nyckel];
+      const lov     = lovSet[nyckel];
+      const arRod   = arSon||!!helgdag;
+      const arIdag  = nyckel===idagNyckel;
+
+      let cls = 'cal-cell dag';
+      if (cell.inne) cls+=' inne'; else cls+=' tonad';
+      if (arRod)  cls+=' rod';
+      if (lov)    cls+=' lov';
+      if (arIdag) cls+=' idag';
+
+      const el = document.createElement('div');
+      el.className   = cls;
+      el.textContent = d;
+      const tips = [helgdag,lov].filter(Boolean);
+      if (tips.length) el.title = tips.join(' · ');
+      grid.appendChild(el);
+    });
+  }
+
+  document.getElementById('prev').addEventListener('click', () => {
+    if (--kalMan<0){kalMan=11;kalAr--;} ritar();
+  });
+  document.getElementById('next').addEventListener('click', () => {
+    if (++kalMan>11){kalMan=0;kalAr++;} ritar();
+  });
+  document.getElementById('lan').addEventListener('change', ritar);
+
+  document.getElementById('ar').textContent = new Date().getFullYear();
+
+  // ── Autodetektera län via IP-geolokalisering ─────────────
+  const REGION_TILL_LAN = [
+    { nycklar:['norrbotten'],                        lan:'norrbotten'      },
+    { nycklar:['västerbotten','vasterbotten'],       lan:'vasterbotten'    },
+    { nycklar:['västernorrland','vasternorrland'],   lan:'vasternorrland'  },
+    { nycklar:['jämtland','jamtland'],               lan:'jamtland'        },
+    { nycklar:['gävleborg','gavleborg'],             lan:'gavleborg'       },
+    { nycklar:['dalarna','dalarnas'],                lan:'dalarna'         },
+    { nycklar:['värmland','varmland'],               lan:'varmland'        },
+    { nycklar:['örebro','orebro'],                   lan:'orebro'          },
+    { nycklar:['västmanland','vastmanland'],         lan:'vastmanland'     },
+    { nycklar:['uppsala'],                           lan:'uppsala'         },
+    { nycklar:['stockholm'],                         lan:'stockholm'       },
+    { nycklar:['södermanland','sodermanland'],       lan:'sodermanland'    },
+    { nycklar:['östergötland','ostergotland'],       lan:'ostergotland'    },
+    { nycklar:['jönköping','jonkoping'],             lan:'jonkoping'       },
+    { nycklar:['kalmar'],                            lan:'kalmar'          },
+    { nycklar:['gotland'],                           lan:'gotland'         },
+    { nycklar:['blekinge'],                          lan:'blekinge'        },
+    { nycklar:['kronoberg'],                         lan:'kronoberg'       },
+    { nycklar:['skåne','skane','scania'],            lan:'skane'           },
+    { nycklar:['halland'],                           lan:'halland'         },
+    { nycklar:['västra götaland','vastragotaland','västra gotaland'], lan:'vastragotaland' },
+  ];
+
+  function matchaLan(regionText) {
+    const r = regionText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    for (const { nycklar, lan } of REGION_TILL_LAN) {
+      if (nycklar.some(k => r.includes(k.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')))) {
+        return lan;
+      }
+    }
+    return null;
+  }
+
+  const sparatLan = localStorage.getItem('valt-lan');
+  if (sparatLan) {
+    const sel = document.getElementById('lan');
+    if ([...sel.options].some(o => o.value === sparatLan)) {
+      sel.value = sparatLan;
+    }
+  } else {
+    fetch('https://ipapi.co/json/')
+      .then(r => r.json())
+      .then(data => {
+        if (data.country_code !== 'SE') return;
+        const lan = matchaLan(data.region || '');
+        if (!lan) return;
+        const sel = document.getElementById('lan');
+        sel.value = lan;
+        localStorage.setItem('valt-lan', lan);
+        ritar();
+      })
+      .catch(() => {});
+  }
+
+  document.getElementById('lan').addEventListener('change', () => {
+    localStorage.setItem('valt-lan', document.getElementById('lan').value);
+  });
+
+  ritar();
+</script>
+</body>
+</html>

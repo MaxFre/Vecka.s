@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integritetspolicy – VilkenVecka.se</title>
+  <meta name="description" content="Integritetspolicy för VilkenVecka.se – hur vi hanterar dina uppgifter och cookies." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.vilkenvecka.se/integritetspolicy.html" />
+  <style>
+    :root {
+      --bg: #d6dcf5; --surface: rgba(255,255,255,0.80); --border: rgba(99,102,241,0.15);
+      --text: #1e2250; --muted: #6470a0; --faded: #a0aac8;
+      --accent1: #4f71f0; --card-shadow: 0 8px 32px rgba(79,113,240,0.12);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; background:var(--bg); color:var(--text);
+           font-family:'Segoe UI',system-ui,sans-serif; padding:2.5rem 1rem 5rem; }
+    .wrap { max-width:720px; margin:0 auto; }
+    header { text-align:center; margin-bottom:2.5rem; }
+    header a { color:var(--accent1); font-weight:700; font-size:0.85rem; text-decoration:none; }
+    header a:hover { text-decoration:underline; }
+    h1 { font-size:2rem; font-weight:900; margin:0.5rem 0 0.25rem; }
+    .uppd { font-size:0.78rem; color:var(--muted); }
+    .card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:1.5rem; box-shadow:var(--card-shadow);
+      padding:2rem 2.5rem; display:flex; flex-direction:column; gap:1.5rem;
+    }
+    section h2 { font-size:1.1rem; font-weight:800; margin-bottom:0.5rem; }
+    section p, section li { font-size:0.9rem; line-height:1.7; color:var(--text); }
+    section ul { padding-left:1.2rem; display:flex; flex-direction:column; gap:0.3rem; }
+    a { color:var(--accent1); }
+    footer { text-align:center; margin-top:2rem; font-size:0.68rem; color:var(--faded); }
+    footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem 1rem; margin-bottom:0.4rem; }
+    footer nav a { color:var(--muted); font-weight:600; text-decoration:none; font-size:0.72rem; }
+    footer nav a:hover { color:var(--accent1); }
+    @media(max-width:600px){ .card { padding:1.5rem 1.2rem; } h1 { font-size:1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="index.html">← Tillbaka till startsidan</a>
+    <h1>Integritetspolicy</h1>
+    <p class="uppd">Senast uppdaterad: januari 2025</p>
+  </header>
+
+  <div class="card">
+    <section>
+      <h2>1. Personuppgiftsansvarig</h2>
+      <p>VilkenVecka.se är ansvarig för behandlingen av personuppgifter på den här webbplatsen. Kontakta oss via <a href="kontakt.html">kontaktsidan</a> om du har frågor.</p>
+    </section>
+
+    <section>
+      <h2>2. Vilka uppgifter samlar vi in?</h2>
+      <p>Vi samlar inte aktivt in personuppgifter. Följande kan hanteras automatiskt:</p>
+      <ul>
+        <li><strong>IP-adress</strong> – används för att automatiskt förinställa ditt län i skollovskalendern via tjänsten ipapi.co. Ingen IP-adress lagras av oss.</li>
+        <li><strong>localStorage</strong> – ditt valda län sparas lokalt i din webbläsare (på din enhet) så att du slipper välja om vid nästa besök. Datan lämnar aldrig din enhet.</li>
+        <li><strong>Annonsdata</strong> – om Google AdSense används kan Google samla in cookiedata. Se Googles integritetspolicy för mer information.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Cookies</h2>
+      <p>Webbplatsen använder inga egna spårningscookies. Tredjeparter (t.ex. Google AdSense) kan sätta cookies för annonspersonalisering i enlighet med deras egna policies.</p>
+    </section>
+
+    <section>
+      <h2>4. Tredjepartstjänster</h2>
+      <ul>
+        <li><strong>ipapi.co</strong> – geolokalisering baserad på IP för att förinställa länsval. Inga uppgifter sparas av oss.</li>
+        <li><strong>Google AdSense</strong> – reklamtjänst som kan använda cookies. Du kan hantera dina inställningar via <a href="https://adssettings.google.com" target="_blank" rel="noopener">Googles annonsinställningar</a>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Dina rättigheter</h2>
+      <p>Enligt GDPR har du rätt att begära tillgång till, rättelse eller radering av dina personuppgifter. Kontakta oss via <a href="kontakt.html">kontaktsidan</a>.</p>
+    </section>
+
+    <section>
+      <h2>6. Ändringar</h2>
+      <p>Vi kan komma att uppdatera denna policy. Vid väsentliga förändringar uppdateras datumet högst upp på sidan.</p>
+    </section>
+  </div>
+
+  <footer>
+    <nav>
+      <a href="index.html">Startsidan</a>
+      <a href="veckor/index.html">Alla veckor</a>
+      <a href="om-oss.html">Om sajten</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <p>&copy; <span id="ar"></span> VilkenVecka.se</p>
+  </footer>
+</div>
+<script>document.getElementById('ar').textContent=new Date().getFullYear();</script>
+</body>
+</html>

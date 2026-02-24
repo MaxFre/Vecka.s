@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – VilkenVecka.se</title>
+  <meta name="description" content="Kontakta VilkenVecka.se med frågor, felanmälan eller samarbetsförfrågningar." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.vilkenvecka.se/kontakt.html" />
+  <style>
+    :root {
+      --bg: #d6dcf5; --surface: rgba(255,255,255,0.80); --border: rgba(99,102,241,0.15);
+      --text: #1e2250; --muted: #6470a0; --faded: #a0aac8;
+      --accent1: #4f71f0; --card-shadow: 0 8px 32px rgba(79,113,240,0.12);
+      --green: #059669; --green-bg: rgba(5,150,105,0.08);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; background:var(--bg); color:var(--text);
+           font-family:'Segoe UI',system-ui,sans-serif; padding:2.5rem 1rem 5rem; }
+    .wrap { max-width:580px; margin:0 auto; }
+    header { text-align:center; margin-bottom:2.5rem; }
+    header a { color:var(--accent1); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-bottom:0.75rem; }
+    header a:hover { text-decoration:underline; }
+    h1 { font-size:2rem; font-weight:900; margin-bottom:0.3rem; }
+    .ingress { font-size:0.95rem; color:var(--muted); line-height:1.6; }
+    .card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:1.5rem; box-shadow:var(--card-shadow); padding:2rem 2.5rem;
+    }
+    .form-rad { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.1rem; }
+    .form-rad label { font-size:0.75rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+    .form-rad input, .form-rad textarea, .form-rad select {
+      background:rgba(99,102,241,0.05); border:1.5px solid var(--border);
+      border-radius:0.6rem; color:var(--text); font-family:inherit; font-size:0.9rem;
+      padding:0.55rem 0.85rem; transition:border-color 0.15s; resize:vertical;
+    }
+    .form-rad input:focus, .form-rad textarea:focus, .form-rad select:focus {
+      outline:none; border-color:var(--accent1);
+    }
+    .form-rad textarea { min-height:120px; }
+    .skicka-btn {
+      width:100%; padding:0.75rem;
+      background:linear-gradient(135deg,#4f71f0,#a78bfa);
+      border:none; border-radius:0.75rem; color:#fff;
+      font-size:1rem; font-weight:800; cursor:pointer;
+      transition:opacity 0.15s; letter-spacing:0.02em;
+    }
+    .skicka-btn:hover { opacity:0.88; }
+    .bekraftelse {
+      display:none; margin-top:1rem; padding:0.8rem 1rem;
+      background:var(--green-bg); border:1px solid rgba(5,150,105,0.2);
+      border-radius:0.7rem; color:var(--green); font-weight:700; font-size:0.9rem; text-align:center;
+    }
+    footer { text-align:center; margin-top:2rem; font-size:0.68rem; color:var(--faded); }
+    footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem 1rem; margin-bottom:0.4rem; }
+    footer nav a { color:var(--muted); font-weight:600; text-decoration:none; font-size:0.72rem; }
+    footer nav a:hover { color:var(--accent1); }
+    @media(max-width:600px){ .card { padding:1.5rem 1.2rem; } h1 { font-size:1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="index.html">← Tillbaka till startsidan</a>
+    <h1>Kontakt</h1>
+    <p class="ingress">Hittat ett fel, vill samarbeta eller har du en fråga? Hör av dig!</p>
+  </header>
+
+  <div class="card">
+    <form id="kontakt-form" action="https://formspree.io/f/DITT_FORMSPREE_ID" method="POST">
+      <div class="form-rad">
+        <label for="namn">Namn</label>
+        <input type="text" id="namn" name="namn" placeholder="Ditt namn" required />
+      </div>
+      <div class="form-rad">
+        <label for="epost">E-post</label>
+        <input type="email" id="epost" name="epost" placeholder="din@epost.se" required />
+      </div>
+      <div class="form-rad">
+        <label for="amne">Ämne</label>
+        <select id="amne" name="amne">
+          <option value="fel">Felanmälan</option>
+          <option value="samarbete">Samarbete / annonsering</option>
+          <option value="fraga">Allmän fråga</option>
+          <option value="annat">Annat</option>
+        </select>
+      </div>
+      <div class="form-rad">
+        <label for="meddelande">Meddelande</label>
+        <textarea id="meddelande" name="meddelande" placeholder="Skriv ditt meddelande här..." required></textarea>
+      </div>
+      <button type="submit" class="skicka-btn">Skicka meddelande</button>
+      <div class="bekraftelse" id="bekraftelse">✅ Tack! Ditt meddelande har skickats.</div>
+    </form>
+  </div>
+
+  <footer>
+    <nav>
+      <a href="index.html">Startsidan</a>
+      <a href="veckor/index.html">Alla veckor</a>
+      <a href="om-oss.html">Om sajten</a>
+      <a href="integritetspolicy.html">Integritetspolicy</a>
+    </nav>
+    <p>&copy; <span id="ar"></span> VilkenVecka.se</p>
+  </footer>
+</div>
+<script>
+  document.getElementById('ar').textContent = new Date().getFullYear();
+  document.getElementById('kontakt-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });
+      if (res.ok) {
+        form.reset();
+        document.getElementById('bekraftelse').style.display = 'block';
+      }
+    } catch {}
+  });
+</script>
+</body>
+</html>
