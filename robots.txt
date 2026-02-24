@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vilkenvecka.se/sitemap.xml
+Sitemap: https://www.vilkenVilketVeckonummer.se/sitemap.xml
