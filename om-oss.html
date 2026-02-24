@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -133,6 +133,13 @@
   </footer>
 </div>
 <script>document.getElementById('ar').textContent=new Date().getFullYear();</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  if (location.hostname.includes('vilketveckonummer.se')) {
+    var vi = document.createElement('script');
+    vi.defer = true;
+    vi.src = '/_vercel/insights/script.js';
+    document.head.appendChild(vi);
+  }
+</script>
 </body>
 </html>

@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
   <link rel="preconnect" href="https://ipapi.co" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247" crossorigin="anonymous"></script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#4f71f0" />
   <title>Vilken vecka är det? – Veckonummer 2026 i Sverige | VilketVeckonummer.se</title>
@@ -1121,6 +1119,22 @@
     });
   }
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.addEventListener('load', function() {
+    // AdSense – laddas efter sidan är klar
+    var ads = document.createElement('script');
+    ads.async = true;
+    ads.crossOrigin = 'anonymous';
+    ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247';
+    document.head.appendChild(ads);
+    // Vercel Insights – bara på produktionsdomänen
+    if (location.hostname.includes('vilketveckonummer.se')) {
+      var vi = document.createElement('script');
+      vi.defer = true;
+      vi.src = '/_vercel/insights/script.js';
+      document.head.appendChild(vi);
+    }
+  });
+</script>
 </body>
 </html>
