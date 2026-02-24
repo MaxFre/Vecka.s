@@ -91,7 +91,7 @@
             "name": "När är sportlovet 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sportlovet 2026 varierar efter län: norra Sverige (v.8), mellansverige (v.7) och södra Sverige (v.9). Välj ditt län i kalendervy för exakt datum."
+              "text": "Sportlovet 2026 varierar efter län: v.7 (Jönköping, Västra Götaland), v.8 (Blekinge, Halland, Kalmar, Kronoberg, Skåne, Södermanland, Uppsala, Örebro, Östergötland), v.9 (Dalarna, Gävleborg, Gotland, Stockholm, Värmland, Västmanland) och v.10 (Norrbotten, Västerbotten, Västernorrland, Jämtland). Välj ditt län i kalendervy för exakt datum."
             }
           },
           {
@@ -221,7 +221,7 @@
     .annons-col {
       position: sticky;
       top: 2rem;
-      display: flex;
+      display: none; /* dölj tills annonser finns */
       flex-direction: column;
       gap: 1rem;
     }
@@ -330,6 +330,7 @@
 
     /* ── Annonsband (mellanrum) ── */
     .annons-mellan {
+      display: none; /* dölj tills annonser finns */
       width: 100%;
       max-width: 552px;
     }
@@ -799,12 +800,6 @@
       localStorage.setItem(TOTAL, totalt);
       localStorage.setItem(MANAD, manaden);
 
-      const stil  = 'color:#4f71f0;font-weight:bold;font-size:13px';
-      const mNamn = nu.toLocaleDateString('sv-SE', { month: 'long', year: 'numeric' });
-      console.log('%c📊 VilketVeckonummer.se – sidvisningar (denna webbläsare)', stil);
-      console.log('  Totalt:      ' + totalt  + ' visning' + (totalt  !== 1 ? 'ar' : ''));
-      console.log('  ' + mNamn[0].toUpperCase() + mNamn.slice(1) + ': ' + manaden + ' visning' + (manaden !== 1 ? 'ar' : ''));
-      console.log('  (Per enhet/webbläsare – alla besökare syns i Vercel Analytics)');
     } catch (e) {}
   })();
 
@@ -869,9 +864,10 @@
   // ── Skollovdata ──────────────────────────────────────────
   function lovPerioder(sportVecka) {
     const sport = {
-      v7:{ from:[2026,1,9],  to:[2026,1,13] },
-      v8:{ from:[2026,1,16], to:[2026,1,20] },
-      v9:{ from:[2026,1,23], to:[2026,1,27] },
+      v7: { from:[2026,1,9],  to:[2026,1,13] },
+      v8: { from:[2026,1,16], to:[2026,1,20] },
+      v9: { from:[2026,1,23], to:[2026,1,27] },
+      v10:{ from:[2026,2,2],  to:[2026,2,6]  },
     }[sportVecka];
     return [
       { namn:'Höstlov 2025',              from:[2025,9,27],  to:[2025,9,31]  },
@@ -884,12 +880,12 @@
   }
 
   const SKOLLOV = {
-    norrbotten:'v8', vasterbotten:'v8', vasternorrland:'v8', jamtland:'v8',
-    gavleborg:'v8',  dalarna:'v8',
-    varmland:'v7',   orebro:'v7', vastmanland:'v7', stockholm:'v7',
-    uppsala:'v7',    sodermanland:'v7', ostergotland:'v7', jonkoping:'v7',
-    kalmar:'v7',     gotland:'v7',
-    blekinge:'v9',   kronoberg:'v9', skane:'v9', halland:'v9', vastragotaland:'v9',
+    norrbotten:'v10', vasterbotten:'v10', vasternorrland:'v10', jamtland:'v10',
+    gavleborg:'v9',   dalarna:'v9',
+    varmland:'v9',    vastmanland:'v9',   stockholm:'v9',       gotland:'v9',
+    orebro:'v8',      sodermanland:'v8',  ostergotland:'v8',    kalmar:'v8',
+    blekinge:'v8',    kronoberg:'v8',     skane:'v8',           halland:'v8',
+    jonkoping:'v7',   vastragotaland:'v7', uppsala:'v8',
   };
 
   function byggLovSet(lansNyckel) {
