@@ -625,6 +625,13 @@
       .card, .annons-mellan, .cal-card { max-width: 100%; }
     }
   </style>
+  <!-- Google Consent Mode v2 – standardvärden (nekat tills samtycke ges) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -1121,13 +1128,6 @@
 </script>
 <script>
   window.addEventListener('load', function() {
-    // AdSense – laddas efter sidan är klar
-    var ads = document.createElement('script');
-    ads.async = true;
-    ads.crossOrigin = 'anonymous';
-    ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247';
-    document.head.appendChild(ads);
-    // Vercel Insights – bara på produktionsdomänen
     if (location.hostname.includes('vilketveckonummer.se')) {
       var vi = document.createElement('script');
       vi.defer = true;
@@ -1135,6 +1135,23 @@
       document.head.appendChild(vi);
     }
   });
+</script>
+<!-- Cookie-samtyckesbanner (GDPR) -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1e2250;color:#fff;padding:1rem 1.5rem;align-items:center;gap:0.75rem;flex-wrap:wrap;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.25);">
+  <p style="margin:0;font-size:0.84rem;flex:1 1 280px;line-height:1.5;">Vi använder cookies för att visa anpassade annonser via Google AdSense. Läs mer i vår <a href="integritetspolicy.html" style="color:#a78bfa;">integritetspolicy</a>.</p>
+  <div style="display:flex;gap:0.5rem;flex-shrink:0;">
+    <button id="cookie-ok" style="background:linear-gradient(135deg,#4f71f0,#a78bfa);border:none;color:#fff;padding:0.5rem 1.25rem;border-radius:0.5rem;font-weight:700;cursor:pointer;font-size:0.85rem;">Acceptera</button>
+    <button id="cookie-nej" style="background:transparent;border:1.5px solid rgba(255,255,255,0.35);color:#fff;padding:0.5rem 0.9rem;border-radius:0.5rem;font-weight:600;cursor:pointer;font-size:0.85rem;">Avvisa</button>
+  </div>
+</div>
+<script>
+(function(){
+  var c=localStorage.getItem('cookie-consent'),b=document.getElementById('cookie-banner');
+  if(c==='accepted'){gtag('consent','update',{'ad_storage':'granted','analytics_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});}
+  else if(!c){b.style.display='flex';}
+  document.getElementById('cookie-ok').onclick=function(){localStorage.setItem('cookie-consent','accepted');gtag('consent','update',{'ad_storage':'granted','analytics_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});b.style.display='none';};
+  document.getElementById('cookie-nej').onclick=function(){localStorage.setItem('cookie-consent','denied');b.style.display='none';};
+})();
 </script>
 </body>
 </html>
