@@ -220,7 +220,7 @@
     .annons-col {
       position: sticky;
       top: 2rem;
-      display: none; /* dölj tills annonser finns */
+      display: none; /* aktivera efter AdSense-godkännande med riktiga slot-ID */
       flex-direction: column;
       gap: 1rem;
     }
@@ -329,7 +329,7 @@
 
     /* ── Annonsband (mellanrum) ── */
     .annons-mellan {
-      display: none; /* dölj tills annonser finns */
+      display: none; /* aktivera efter AdSense-godkännande med riktiga slot-ID */
       width: 100%;
       max-width: 552px;
     }
@@ -624,6 +624,49 @@
       .huvud { grid-column: 1 / -1; align-items: stretch; }
       .card, .annons-mellan, .cal-card { max-width: 100%; }
     }
+
+    /* ── Toppnavigation ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(214,220,245,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(99,102,241,0.18);
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .site-header .logo {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--accent1);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .site-header nav {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem 1.2rem;
+      flex-wrap: wrap;
+    }
+    .site-header nav a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .site-header nav a:hover { color: var(--accent1); }
+    @media (max-width: 500px) {
+      .site-header { padding: 0.6rem 1rem; }
+      .site-header .logo { font-size: 0.85rem; }
+      .site-header nav a { font-size: 0.72rem; }
+    }
   </style>
   <!-- Google Consent Mode v2 – standardvärden (nekat tills samtycke ges) -->
   <script>
@@ -635,15 +678,20 @@
 </head>
 <body>
 
+<header class="site-header">
+  <a class="logo" href="/">VilketVeckonummer.se</a>
+  <nav>
+    <a href="veckor/index.html">Alla veckor</a>
+    <a href="om-oss.html">Om sajten</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="integritetspolicy.html">Integritetspolicy</a>
+  </nav>
+</header>
+
 <div class="layout">
 
-  <!-- Vänster annons -->
+  <!-- Vänster annons (lägg till slot-ID efter godkännande) -->
   <aside class="annons-col">
-    <div class="annons-yta annons-sky">
-      <span class="annons-ikon">📢</span>
-      <span>Annons</span>
-      <span style="font-size:0.6rem;opacity:0.6">160 × 600</span>
-    </div>
   </aside>
 
   <!-- Huvudinnehåll -->
@@ -660,12 +708,8 @@
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
     </div>
 
-    <!-- Annonsband -->
+    <!-- Annonsband (lägg till slot-ID efter godkännande) -->
     <div class="annons-mellan">
-      <div class="annons-yta annons-band">
-        <span class="annons-ikon">📢</span>
-        <span>Annons — 468 × 90</span>
-      </div>
     </div>
 
     <!-- Kalender -->
@@ -777,13 +821,8 @@
     </div>
   </main>
 
-  <!-- Höger annons -->
+  <!-- Höger annons (lägg till slot-ID efter godkännande) -->
   <aside class="annons-col">
-    <div class="annons-yta annons-sky">
-      <span class="annons-ikon">📢</span>
-      <span>Annons</span>
-      <span style="font-size:0.6rem;opacity:0.6">160 × 600</span>
-    </div>
   </aside>
 
 </div>
