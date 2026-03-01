@@ -44,12 +44,8 @@
            font-family:'Segoe UI',system-ui,sans-serif; padding:2.5rem 1rem 5rem; }
     .wrap { max-width:860px; margin:0 auto; }
 
-    /* Bakgrundsblobbar */
-    body::before, body::after {
-      content:''; position:fixed; border-radius:50%; filter:blur(90px); opacity:0.45; pointer-events:none; z-index:0;
-    }
-    body::before { width:500px; height:500px; background:radial-gradient(circle,#a5b4fc 0%,#c084fc 100%); top:-100px; left:-100px; }
-    body::after  { width:400px; height:400px; background:radial-gradient(circle,#7dd3fc 0%,#a5b4fc 100%); bottom:-80px; right:-80px; }
+    /* Bakgrundsblobbar – ersatta av pg-bg */
+    body::before, body::after { display:none; }
 
     .huvud { position:relative; z-index:1; }
 
@@ -97,9 +93,13 @@
     footer nav a { color:var(--muted); font-weight:600; text-decoration:none; font-size:0.72rem; }
     footer nav a:hover { color:var(--accent1); }
     @media(max-width:600px){ h1 { font-size:1.5rem; } .vecko-grid { grid-template-columns:1fr 1fr; } }
+    #pg-bg { position:fixed; inset:0; z-index:0; overflow:hidden; }
+    #pg-bg img { width:100%; height:100%; object-fit:cover; filter:blur(4px) brightness(0.88) saturate(1.05); transform:scale(1.01); }
+    body { background:transparent !important; }
   </style>
 </head>
 <body>
+<div id="pg-bg"><img id="pg-bg-img" alt="" /></div>
 <div class="wrap huvud">
   <header>
     <a href="../index.html">← Tillbaka till startsidan</a>
@@ -248,6 +248,13 @@
   }
 
   renderVeckor();
+</script>
+<script>
+(function(){
+  var m=new Date().getMonth();
+  var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';
+  document.getElementById('pg-bg-img').src='../images/'+s+'.png';
+})();
 </script>
 <script>
   if (location.hostname.includes('vilketveckonummer.se')) {
