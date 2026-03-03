@@ -398,8 +398,15 @@
     .cal-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 1rem;
+    }
+
+    .cal-footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
     }
 
     .cal-title {
@@ -413,11 +420,11 @@
       background: var(--surface2);
       border: 1px solid var(--border);
       color: var(--muted);
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 0.55rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 0.65rem;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -793,9 +800,7 @@
     <!-- Kalender -->
     <div class="cal-card">
       <div class="cal-header">
-        <button class="cal-nav" id="prev" title="Föregående månad">&#8592;</button>
         <span class="cal-title" id="cal-title"></span>
-        <button class="cal-nav" id="next" title="Nästa månad">&#8594;</button>
       </div>
 
       <div class="lans-rad">
@@ -842,6 +847,11 @@
         <span class="fk-item"><span class="prick prick-rod"></span>Röd dag / söndag</span>
         <span class="fk-item"><span class="prick prick-gron"></span>Skollov (valt län)</span>
         <span class="fk-item"><span class="prick prick-bla"></span>Idag</span>
+      </div>
+
+      <div class="cal-footer-nav">
+        <button class="cal-nav" id="prev" title="Föregående månad">&#8592;</button>
+        <button class="cal-nav" id="next" title="Nästa månad">&#8594;</button>
       </div>
     </div>
 
