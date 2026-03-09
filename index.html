@@ -557,6 +557,61 @@
       width: 100%;
       max-width: 552px;
     }
+    .trafik-sektion {
+      width: 100%;
+      max-width: 552px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .trafik-sektion h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      text-align: center;
+    }
+    .trafik-intro {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+    .trafik-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+    .trafik-kort {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .trafik-kort:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(79,113,240,0.14);
+    }
+    .trafik-kort strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .trafik-kort span {
+      display: block;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
     .faq-sektion h2 {
       font-size: 1rem;
       font-weight: 800;
@@ -704,6 +759,7 @@
       .annons-col { display: none; }
       .huvud { grid-column: 1 / -1; align-items: stretch; }
       .card, .annons-mellan, .cal-card { max-width: 100%; }
+      .trafik-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Toppnavigation ── */
@@ -854,6 +910,27 @@
         <button class="cal-nav" id="next" title="Nästa månad">&#8594;</button>
       </div>
     </div>
+
+    <section class="trafik-sektion" aria-label="Guider för veckonummer, röda dagar och sportlov 2026">
+      <h2>Populära guider 2026</h2>
+      <div class="trafik-intro">
+        Utöver verktyget för aktuell vecka har vi samlat guider för vanliga sökningar om veckonummer, röda dagar och sportlov i Sverige. De här sidorna är byggda för att ge snabb överblick och leda dig vidare till rätt vecka i kalendern.
+      </div>
+      <div class="trafik-grid">
+        <a class="trafik-kort" href="veckonummer-2026.html">
+          <strong>Veckonummer 2026</strong>
+          <span>Se årets alla veckor, vecka 1, vecka 53 och hur ISO-veckor räknas.</span>
+        </a>
+        <a class="trafik-kort" href="roda-dagar-2026.html">
+          <strong>Röda dagar 2026</strong>
+          <span>Lista över svenska helgdagar, långhelger och planeringstips.</span>
+        </a>
+        <a class="trafik-kort" href="sportlov-2026.html">
+          <strong>Sportlov 2026</strong>
+          <span>Översikt över sportlovsveckor i olika delar av Sverige.</span>
+        </a>
+      </div>
+    </section>
 
     <!-- FAQ-sektion -->
     <section class="faq-sektion" aria-label="Vanliga frågor om veckonummer">

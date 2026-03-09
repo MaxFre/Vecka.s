@@ -22,12 +22,28 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "url": "https://www.vilketveckonummer.se/kontakt.html",
-    "name": "Kontakt – VilketVeckonummer.se",
-    "description": "Kontakta VilketVeckonummer.se med frågor, felanmälan eller samarbetsförfrågningar.",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.vilketveckonummer.se/", "name": "VilketVeckonummer.se" },
-    "inLanguage": "sv-SE"
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "url": "https://www.vilketveckonummer.se/kontakt.html",
+        "name": "Kontakt – VilketVeckonummer.se",
+        "description": "Kontakta VilketVeckonummer.se med frågor, felanmälan eller samarbetsförfrågningar.",
+        "isPartOf": { "@type": "WebSite", "url": "https://www.vilketveckonummer.se/", "name": "VilketVeckonummer.se" },
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "Organization",
+        "name": "VilketVeckonummer.se",
+        "url": "https://www.vilketveckonummer.se/",
+        "email": "mailto:mafrg@live.se",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "mafrg@live.se",
+          "availableLanguage": ["sv", "en"]
+        }
+      }
+    ]
   }
   </script>
   <style>
@@ -104,6 +120,10 @@
         <li style="font-size:0.88rem;color:var(--muted);">💡 <strong>Förslag</strong> – Saknar du en funktion? Vi lyssnar gärna på förbättringsförslag.</li>
       </ul>
     </section>
+    <section style="margin-bottom:1.5rem;background:rgba(79,113,240,0.06);border:1px solid var(--border);border-radius:1rem;padding:1rem 1.1rem;">
+      <h2 style="font-size:1rem;font-weight:800;margin-bottom:0.55rem;">Direktkontakt</h2>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">För frågor om innehåll, rättelser, integritet eller annonsering kan du mejla direkt till <a href="mailto:mafrg@live.se">mafrg@live.se</a>. Meddelanden besvaras normalt så snart som möjligt.</p>
+    </section>
     <hr style="border:none;border-top:1px solid var(--border);margin-bottom:1.5rem;" />
     <form id="kontakt-form" method="POST">
       <div class="form-rad">
@@ -130,6 +150,7 @@
       <button type="submit" class="skicka-btn">Skicka meddelande</button>
       <div class="bekraftelse" id="bekraftelse">✅ Tack! Ditt meddelande har skickats.</div>
     </form>
+    <p style="margin-top:1rem;font-size:0.76rem;color:var(--muted);line-height:1.6;">Formuläret används endast för att ta emot och besvara ditt meddelande. Skicka inga känsliga personuppgifter i fritextfältet.</p>
   </div>
 
   <footer>

@@ -22,12 +22,28 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "url": "https://www.vilketveckonummer.se/om-oss.html",
-    "name": "Om VilketVeckonummer.se",
-    "description": "Om VilketVeckonummer.se – en snabb och enkel sajt för att se aktuellt veckonummer, kalender med röda dagar och skollov per län i Sverige.",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.vilketveckonummer.se/", "name": "VilketVeckonummer.se" },
-    "inLanguage": "sv-SE"
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "url": "https://www.vilketveckonummer.se/om-oss.html",
+        "name": "Om VilketVeckonummer.se",
+        "description": "Om VilketVeckonummer.se – en snabb och enkel sajt för att se aktuellt veckonummer, kalender med röda dagar och skollov per län i Sverige.",
+        "isPartOf": { "@type": "WebSite", "url": "https://www.vilketveckonummer.se/", "name": "VilketVeckonummer.se" },
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "Organization",
+        "name": "VilketVeckonummer.se",
+        "url": "https://www.vilketveckonummer.se/",
+        "email": "mailto:mafrg@live.se",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "mafrg@live.se",
+          "availableLanguage": ["sv", "en"]
+        }
+      }
+    ]
   }
   </script>
   <style>
@@ -126,8 +142,18 @@
     </section>
 
     <section>
+      <h2>Redaktion och källor</h2>
+      <p>Innehållet på VilketVeckonummer.se sammanställs och underhålls manuellt. Veckonummer beräknas enligt ISO 8601 och uppgifter om helgdagar, lov och datum kontrolleras mot offentligt tillgängliga kalendrar och myndighetsnära källor när sidan uppdateras.</p>
+    </section>
+
+    <section>
+      <h2>Transparens</h2>
+      <p>Sajten drivs från Sverige och fokuserar på saklig, snabb och lättläst information om veckonummer, röda dagar och skollov. Om du hittar ett fel eller vill begära rättelse kan du kontakta oss via <a href="kontakt.html">kontaktsidan</a> eller direkt på <a href="mailto:mafrg@live.se">mafrg@live.se</a>.</p>
+    </section>
+
+    <section>
       <h2>Vem driver sajten?</h2>
-      <p>VilketVeckonummer.se är skapat och underhålls av en svensk webbutvecklare med intresse för användbar och snabb webbteknik. Sajten drivs utan vinstintresse och är gratis att använda. Har du frågor eller synpunkter? <a href="kontakt.html">Kontakta oss här</a>.</p>
+      <p>VilketVeckonummer.se är skapat och underhålls av en svensk webbutvecklare med intresse för användbar och snabb webbteknik. Sajten är gratis att använda och finansieras på sikt genom annonsering. Har du frågor, synpunkter eller samarbetsförfrågningar? <a href="kontakt.html">Kontakta oss här</a> eller mejla <a href="mailto:mafrg@live.se">mafrg@live.se</a>.</p>
     </section>
   </div>
 
