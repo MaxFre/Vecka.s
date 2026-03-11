@@ -95,6 +95,14 @@
     .genvag { background:rgba(79,113,240,0.06); border:1px solid var(--border); border-radius:1rem; padding:1rem 1.05rem; text-decoration:none; color:inherit; }
     .genvag strong { display:block; font-size:0.95rem; margin-bottom:0.25rem; }
     .genvag span { font-size:0.82rem; color:var(--muted); line-height:1.55; }
+    .progress-wrap { display:flex; flex-direction:column; gap:0.4rem; }
+    .progress-bar { background:rgba(79,113,240,0.12); border-radius:99px; height:0.55rem; overflow:hidden; }
+    .progress-fill { height:100%; background:linear-gradient(to right,#4f71f0,#7c5cfc); border-radius:99px; transition:width 0.6s ease; }
+    .progress-labels { font-size:0.8rem; color:var(--muted); display:flex; justify-content:space-between; }
+    .stats-row { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+    .stat-box { background:rgba(79,113,240,0.05); border:1px solid var(--border); border-radius:1rem; padding:0.9rem 1rem; text-align:center; }
+    .stat-tal { font-size:1.65rem; font-weight:900; color:var(--accent1); display:block; }
+    .stat-etikett { font-size:0.78rem; color:var(--muted); margin-top:0.15rem; }
     a { color:var(--accent1); }
     footer { text-align:center; margin-top:2rem; font-size:0.68rem; color:var(--faded); }
     footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem 1rem; margin-bottom:0.4rem; }
@@ -121,6 +129,31 @@
         <div class="rakna-siffra" id="dagar-kvar">–</div>
         <div class="rakna-enhet" id="rakna-enhet">dagar tills jul</div>
         <div class="rakna-datum" id="kvar-datum"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Framsteg mot julafton</h2>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <div class="progress-labels">
+          <span>1 jan</span>
+          <span id="progress-procent">0%</span>
+          <span>24 dec</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-tal" id="dagar-gatt">–</span>
+          <div class="stat-etikett">dagar sedan nyår</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-tal" id="dagar-totalt">365</span>
+          <div class="stat-etikett">dagar nyår→julafton</div>
+        </div>
       </div>
     </section>
 
@@ -222,6 +255,19 @@
   document.getElementById('jul-ar-rubrik').textContent = ar;
   document.getElementById('jul-ar').textContent = ar;
   document.getElementById('ar-footer').textContent = new Date().getFullYear();
+
+  // Framsteg mot julafton
+  var _d = new Date(); _d.setHours(0,0,0,0);
+  var _jul = new Date(_d.getFullYear(), 11, 24); _jul.setHours(0,0,0,0);
+  if (_d > _jul) { _jul = new Date(_d.getFullYear()+1, 11, 24); _jul.setHours(0,0,0,0); }
+  var _start = new Date(_jul.getFullYear(), 0, 1); _start.setHours(0,0,0,0);
+  var _tot = Math.round((_jul - _start) / 86400000);
+  var _gatt = Math.max(0, Math.round((_d - _start) / 86400000));
+  var _pct = Math.min(100, Math.round((_gatt / _tot) * 100));
+  document.getElementById('dagar-gatt').textContent = _gatt;
+  document.getElementById('dagar-totalt').textContent = _tot;
+  document.getElementById('progress-fill').style.width = _pct + '%';
+  document.getElementById('progress-procent').textContent = _pct + '%';
 })();
 </script>
 <script>

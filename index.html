@@ -382,6 +382,40 @@
       box-shadow: 0 2px 0 rgba(50,70,180,0.35), 0 3px 10px rgba(79,113,240,0.2);
     }
 
+    /* ── Mini-nedräkning-chips ── */
+    .mini-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-top: 1.1rem;
+      width: 100%;
+    }
+    .mini-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.05rem;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(99,102,241,0.18);
+      border-radius: 0.9rem;
+      padding: 0.55rem 0.75rem 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      min-width: 5.5rem;
+      flex: 1 1 5rem;
+      max-width: 7.5rem;
+      transition: transform 0.12s, box-shadow 0.12s;
+      box-shadow: 0 2px 8px rgba(79,113,240,0.08);
+    }
+    .mini-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 16px rgba(79,113,240,0.18);
+    }
+    .mini-chip-ikon { font-size: 1.1rem; line-height: 1; }
+    .mini-chip-tal  { font-size: 1.35rem; font-weight: 900; color: var(--accent1); line-height: 1.1; }
+    .mini-chip-text { font-size: 0.62rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; line-height: 1.3; margin-top: 0.1rem; }
+
     /* ── Annonsband (mellanrum) ── */
     .annons-mellan {
       display: none; /* aktivera efter AdSense-godkännande med riktiga slot-ID */
@@ -827,7 +861,9 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
   </script>
+  <!-- AdSense disabled for local testing
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247" crossorigin="anonymous"></script>
+  -->
 </head>
 <body>
 
@@ -863,6 +899,29 @@
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
       <a href="veckor/index.html" class="alla-veckor-btn">Alla veckor</a>
+
+      <div class="mini-stats">
+        <a class="mini-chip" href="hur-manga-dagar-kvar-pa-aret.html">
+          <span class="mini-chip-ikon">📅</span>
+          <span class="mini-chip-tal" id="chip-dagar-kvar">–</span>
+          <span class="mini-chip-text">dagar kvar<br>på året</span>
+        </a>
+        <a class="mini-chip" href="hur-manga-veckor-kvar-pa-aret.html">
+          <span class="mini-chip-ikon">🗓️</span>
+          <span class="mini-chip-tal" id="chip-veckor-kvar">–</span>
+          <span class="mini-chip-text">veckor kvar<br>på året</span>
+        </a>
+        <a class="mini-chip" href="hur-manga-dagar-till-midsommar.html">
+          <span class="mini-chip-ikon">🌸</span>
+          <span class="mini-chip-tal" id="chip-midsommar">–</span>
+          <span class="mini-chip-text">dagar till<br>midsommar</span>
+        </a>
+        <a class="mini-chip" href="hur-manga-dagar-till-jul.html">
+          <span class="mini-chip-ikon">🎄</span>
+          <span class="mini-chip-tal" id="chip-jul">–</span>
+          <span class="mini-chip-text">dagar till<br>jul</span>
+        </a>
+      </div>
     </div>
 
     <!-- Annonsband (lägg till slot-ID efter godkännande) -->
@@ -1222,6 +1281,39 @@
   }
 
   setDatum(new Date());
+
+  // ── Mini-chips nedräkning ──────────────────────────────────
+  (function () {
+    const d = new Date(); d.setHours(0,0,0,0);
+    const ar = d.getFullYear();
+    // Dagar kvar på året
+    const arSlut = new Date(ar, 11, 31); arSlut.setHours(0,0,0,0);
+    document.getElementById('chip-dagar-kvar').textContent =
+      Math.round((arSlut - d) / 86400000) + 1;
+    // Veckor kvar
+    function isoV(dt) {
+      const t = new Date(dt); t.setHours(0,0,0,0);
+      t.setDate(t.getDate() + 3 - (t.getDay()+6)%7);
+      const w1 = new Date(t.getFullYear(),0,4);
+      return 1 + Math.round(((t-w1)/86400000 - 3 + (w1.getDay()+6)%7)/7);
+    }
+    const lastVecka = isoV(new Date(ar,11,28));
+    document.getElementById('chip-veckor-kvar').textContent = lastVecka - isoV(d);
+    // Dagar till midsommar
+    function midsommarafton(y) {
+      for (let day=20; day<=26; day++) {
+        const dt = new Date(y,5,day);
+        if (dt.getDay()===6) return new Date(y,5,day-1);
+      }
+    }
+    let mid = midsommarafton(ar); mid.setHours(0,0,0,0);
+    if (d > mid) { mid = midsommarafton(ar+1); mid.setHours(0,0,0,0); }
+    document.getElementById('chip-midsommar').textContent = Math.round((mid-d)/86400000);
+    // Dagar till jul
+    let jul = new Date(ar,11,24); jul.setHours(0,0,0,0);
+    if (d > jul) { jul = new Date(ar+1,11,24); jul.setHours(0,0,0,0); }
+    document.getElementById('chip-jul').textContent = Math.round((jul-d)/86400000);
+  })();
 
   function uppdateraBanner(lovSet) {
     const banner  = document.getElementById('vecka-lov-banner');
