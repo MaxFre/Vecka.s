@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#4f71f0" />
   <title>Vilken vecka är det? – Veckonummer 2026 i Sverige | VilketVeckonummer.se</title>
   <meta name="description" content="Vilket veckonummer är det idag 2026? Se aktuell vecka, kalender med röda dagar, skollov per län och alla svenska helgdagar. Uppdateras automatiskt – VilketVeckonummer.se." />
-  <meta name="keywords" content="veckonummer, vilken vecka är det, veckonummer 2026, aktuell vecka, kalender, skollov, röda dagar, Sverige, vecka idag, ISO 8601, midsommar 2026, sommarlov 2026, höstlov 2026, påsklov 2026, sportlov 2026, helgdagar 2026" />
+  <meta name="keywords" content="veckonummer, vilken vecka är det, veckonummer 2026, aktuell vecka, kalender, skollov, röda dagar, Sverige, vecka idag, ISO 8601, midsommar 2026, sommarlov 2026, höstlov 2026, påsklov 2026, sportlov 2026, helgdagar 2026, hur många dagar kvar på året, hur många veckor kvar på året, dagar till jul, dagar till midsommar, nedräkning" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="VilketVeckonummer.se" />
   <meta name="geo.region" content="SE" />
@@ -48,7 +48,7 @@
         "isPartOf": { "@id": "https://www.vilketveckonummer.se/#website" },
         "description": "Se vilket veckonummer det är idag 2026 i Sverige med kalender, röda dagar och skollov per län.",
         "datePublished": "2025-01-01",
-        "dateModified": "2026-03-01",
+        "dateModified": "2026-03-11",
         "inLanguage": "sv-SE",
         "breadcrumb": {
           "@type": "BreadcrumbList",
@@ -162,6 +162,38 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Sommarlovet 2026 pågår ungefär från vecka 24–25 (mitten av juni) till vecka 33–34 (mitten av augusti). De flesta elever har lov i cirka 10 veckor, men exakta datum bestäms av respektive kommun."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur många dagar kvar på året 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Antalet dagar kvar på året räknas automatiskt på VilketVeckonummer.se. Räknaren visar exakt hur många dagar som återstår fram till 31 december, plus en progressbar över hur stor del av 2026 som gått."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur många veckor kvar på året 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "År 2026 har totalt 53 ISO-veckor. Hur många som återstår beror på aktuell vecka – se vår nedräkningssida för veckor kvar på året med live-uppdatering."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur många dagar till jul 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Julafton 2026 infaller torsdagen den 24 december. Antalet dagar kvar till jul räknas automatiskt och uppdateras dagligen på VilketVeckonummer.se."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hur många dagar till midsommar 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Midsommarafton 2026 är fredagen den 19 juni. Antalet dagar kvar till midsommar räknas automatiskt och uppdateras dagligen på VilketVeckonummer.se."
             }
           }
         ]
@@ -415,6 +447,32 @@
     .mini-chip-ikon { font-size: 1.1rem; line-height: 1; }
     .mini-chip-tal  { font-size: 1.35rem; font-weight: 900; color: var(--accent1); line-height: 1.1; }
     .mini-chip-text { font-size: 0.62rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; line-height: 1.3; margin-top: 0.1rem; }
+
+    /* ── Kalender-scroll-hint (mobil only) ── */
+    .kalender-hint {
+      display: none;
+      justify-content: center;
+      margin-top: 0.75rem;
+    }
+    .kalender-hint a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(79,113,240,0.1);
+      border: 1px solid rgba(79,113,240,0.22);
+      border-radius: 99px;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--accent1);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      animation: bounce-down 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(4px); }
+    }
 
     /* ── Annonsband (mellanrum) ── */
     .annons-mellan {
@@ -810,6 +868,15 @@
       .huvud { grid-column: 1 / -1; align-items: stretch; }
       .card, .annons-mellan, .cal-card { max-width: 100%; }
       .trafik-grid { grid-template-columns: 1fr; }
+      /* Kortare säsongsbild på mobil */
+      .sasong-bild img { max-height: 150px; object-fit: cover; }
+      /* Mindre veckosiffra på mobil */
+      .vecka-siffra { font-size: 5.5rem; }
+      /* Chips: 2×2 rutnät på mobil */
+      .mini-stats { display: grid; grid-template-columns: 1fr 1fr; max-width: 100%; }
+      .mini-chip { max-width: 100%; }
+      /* Visa kalender-hint */
+      .kalender-hint { display: flex !important; }
     }
 
     /* ── Toppnavigation ── */
@@ -861,9 +928,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
   </script>
-  <!-- AdSense disabled for local testing
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3379757990050247" crossorigin="anonymous"></script>
-  -->
 </head>
 <body>
 
@@ -922,6 +987,10 @@
           <span class="mini-chip-text">dagar till<br>jul</span>
         </a>
       </div>
+
+      <div class="kalender-hint">
+        <a href="#kalender">📅 Se kalender ↓</a>
+      </div>
     </div>
 
     <!-- Annonsband (lägg till slot-ID efter godkännande) -->
@@ -929,7 +998,7 @@
     </div>
 
     <!-- Kalender -->
-    <div class="cal-card">
+    <div class="cal-card" id="kalender">
       <div class="cal-header">
         <span class="cal-title" id="cal-title"></span>
       </div>
