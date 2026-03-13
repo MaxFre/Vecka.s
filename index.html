@@ -85,7 +85,6 @@
               "@type": "Answer",
               "text": "Vad är det för vecka idag? Aktuell vecka och veckonummer visas direkt på VilketVeckonummer.se och uppdateras automatiskt varje dag enligt ISO 8601-standarden som gäller i Sverige."
             }
-          }
           },
           {
             "@type": "Question",
@@ -108,7 +107,7 @@
             "name": "När är sportlovet 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sportlovet 2026 ligger olika beroende på län: Norra Sverige (v.8, 16–20 feb), Mellansverige (v.7, 9–13 feb) och Södra Sverige (v.9, 23–27 feb). Välj ditt län i kalendern för att se exakta datum."
+              "text": "Sportlovet 2026 ligger olika beroende på län: vecka 7 i Västra Götalands och Jönköpings län, vecka 8 i bland annat Uppsala och södra Sverige, vecka 9 i Stockholm och flera län i Mellansverige, samt vecka 10 i Norrbotten, Västerbotten, Västernorrland och Jämtland. Välj ditt län i kalendern för att se exakta datum."
             }
           },
           {
@@ -124,7 +123,7 @@
             "name": "När är påsklovet 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Påsklovet 2026 infaller vecka 14, med start 2 april och slut 9 april. Detta gäller för de flesta län men kan variera några dagar beroende på kommun."
+              "text": "Påsklovet 2026 ligger i anslutning till påskhelgen och varierar mellan kommuner. Många skolor har lov under vecka 14 eller vecka 15, så kontrollera alltid kommunens eller skolans läsårstider."
             }
           },
           {
@@ -595,6 +594,12 @@
       outline: none;
     }
     .lans-val option { background: #eef2ff; color: #1e2250; }
+    .lov-meta {
+      margin: -0.35rem 0 1rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
 
     /* rutnät */
     .cal-grid {
@@ -1066,6 +1071,7 @@
           </optgroup>
         </select>
       </div>
+      <p class="lov-meta">Sportlov visas exakt per län. Påsklov, sommarlov, höstlov och jullov bygger på vanliga kommunala läsårstider i valt län och kan variera mellan kommuner och skolor.</p>
 
       <div class="cal-grid" id="cal-grid"></div>
 
@@ -1073,7 +1079,7 @@
 
       <div class="forklaring">
         <span class="fk-item"><span class="prick prick-rod"></span>Röd dag / söndag</span>
-        <span class="fk-item"><span class="prick prick-gron"></span>Skollov (valt län)</span>
+        <span class="fk-item"><span class="prick prick-gron"></span>Lov i valt län</span>
         <span class="fk-item"><span class="prick prick-bla"></span>Idag</span>
       </div>
 
@@ -1103,11 +1109,11 @@
         </a>
         <a class="trafik-kort" href="/pasklov-2026/">
           <strong>Påsklov 2026</strong>
-          <span>Vecka 14 – datum, röda dagar och planeringstips för påsklovet.</span>
+          <span>Vanliga lovveckor runt påskhelgen, röda dagar och planeringstips.</span>
         </a>
         <a class="trafik-kort" href="/sommarlov-2026/">
           <strong>Sommarlov 2026</strong>
-          <span>Vecka 24–33 – när slutar och börjar skolan?</span>
+          <span>Vanliga veckor för skolavslutning och skolstart sommaren 2026.</span>
         </a>
         <a class="trafik-kort" href="/sportlov-2026/">
           <strong>Sportlov 2026</strong>
@@ -1163,7 +1169,7 @@
 
       <details class="faq-item">
         <summary>När är sportlovet 2026?</summary>
-        <p>Sportlovet 2026 ligger olika beroende på län: <strong>Norra Sverige</strong> (v.8, 16–20 feb), <strong>Mellansverige</strong> (v.7, 9–13 feb) och <strong>Södra Sverige</strong> (v.9, 23–27 feb). Välj ditt län i kalendern för att se exakta datum.</p>
+        <p>Sportlovet 2026 ligger olika beroende på län: <strong>vecka 7</strong> i Västra Götalands och Jönköpings län, <strong>vecka 8</strong> i bland annat Uppsala och södra Sverige, <strong>vecka 9</strong> i Stockholm och flera län i Mellansverige, samt <strong>vecka 10</strong> i Norrbotten, Västerbotten, Västernorrland och Jämtland. Välj ditt län i kalendern för att se exakta datum.</p>
       </details>
 
       <details class="faq-item">
@@ -1173,7 +1179,7 @@
 
       <details class="faq-item">
         <summary>När är påsklovet 2026?</summary>
-        <p>Påsklovet 2026 infaller vecka 14, med start 2 april och slut 9 april. Detta gäller för de flesta län men kan variera några dagar beroende på kommun.</p>
+        <p>Påsklovet 2026 ligger i anslutning till påskhelgen och varierar mellan kommuner. Många skolor har lov under vecka <strong>14</strong> eller vecka <strong>15</strong>, så kontrollera alltid kommunens eller skolans läsårstider.</p>
       </details>
 
       <details class="faq-item">
@@ -1315,40 +1321,56 @@
   }
 
   // ── Skollovdata ──────────────────────────────────────────
-  function lovPerioder(sportVecka) {
-    const sport = {
-      v7: { from:[2026,1,9],  to:[2026,1,13] },
-      v8: { from:[2026,1,16], to:[2026,1,20] },
-      v9: { from:[2026,1,23], to:[2026,1,27] },
-      v10:{ from:[2026,2,2],  to:[2026,2,6]  },
-    }[sportVecka];
+  const SPORTLOV_PER_LAN = {
+    norrbotten:{ from:[2026,2,2],  to:[2026,2,6],  vecka:'v10' },
+    vasterbotten:{ from:[2026,2,2],  to:[2026,2,6],  vecka:'v10' },
+    vasternorrland:{ from:[2026,2,2],  to:[2026,2,6],  vecka:'v10' },
+    jamtland:{ from:[2026,2,2],  to:[2026,2,6],  vecka:'v10' },
+    gavleborg:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    dalarna:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    varmland:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    vastmanland:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    stockholm:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    gotland:{ from:[2026,1,23], to:[2026,1,27], vecka:'v9' },
+    orebro:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    sodermanland:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    ostergotland:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    kalmar:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    blekinge:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    kronoberg:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    skane:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    halland:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+    jonkoping:{ from:[2026,1,9], to:[2026,1,13], vecka:'v7' },
+    vastragotaland:{ from:[2026,1,9], to:[2026,1,13], vecka:'v7' },
+    uppsala:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
+  };
+
+  const GEMENSAMMA_LOV = [
+    { namn:'Höstlov 2025', etikett:'Höstlov 2025 (kommunberoende)', from:[2025,9,27], to:[2025,9,31] },
+    { namn:'Jullov 2025–2026', etikett:'Jullov 2025–2026 (kommunberoende)', from:[2025,11,20], to:[2026,0,7] },
+    { namn:'Påsklov 2026', etikett:'Påsklov 2026 (kommunberoende)', from:[2026,2,30], to:[2026,3,6] },
+    { namn:'Sommarlov 2026', etikett:'Sommarlov 2026 (kommunberoende)', from:[2026,5,11], to:[2026,7,16] },
+    { namn:'Höstlov 2026', etikett:'Höstlov 2026 (vanligt vecka 44)', from:[2026,9,26], to:[2026,9,30] },
+  ];
+
+  function lovPerioderForLan(lansNyckel) {
+    const sport = SPORTLOV_PER_LAN[lansNyckel];
+    if (!sport) return [];
     return [
-      { namn:'Höstlov 2025',              from:[2025,9,27],  to:[2025,9,31]  },
-      { namn:'Jullov 2025–2026',          from:[2025,11,20], to:[2026,0,7]   },
-      { namn:`Sportlov 2026 (${sportVecka})`, from:sport.from, to:sport.to   },
-      { namn:'Påsklov 2026',              from:[2026,3,2],   to:[2026,3,9]   },
-      { namn:'Sommarlov 2026',            from:[2026,5,11],  to:[2026,7,16]  },
-      { namn:'Höstlov 2026',              from:[2026,9,26],  to:[2026,9,30]  },
+      ...GEMENSAMMA_LOV,
+      { namn:'Sportlov 2026', etikett:`Sportlov 2026 (${sport.vecka})`, from:sport.from, to:sport.to },
     ];
   }
-
-  const SKOLLOV = {
-    norrbotten:'v10', vasterbotten:'v10', vasternorrland:'v10', jamtland:'v10',
-    gavleborg:'v9',   dalarna:'v9',
-    varmland:'v9',    vastmanland:'v9',   stockholm:'v9',       gotland:'v9',
-    orebro:'v8',      sodermanland:'v8',  ostergotland:'v8',    kalmar:'v8',
-    blekinge:'v8',    kronoberg:'v8',     skane:'v8',           halland:'v8',
-    jonkoping:'v7',   vastragotaland:'v7', uppsala:'v8',
-  };
 
   function byggLovSet(lansNyckel) {
     const result = {};
     if (!lansNyckel) return result;
-    lovPerioder(SKOLLOV[lansNyckel]).forEach(({ namn, from, to }) => {
+    lovPerioderForLan(lansNyckel).forEach(({ namn, etikett, from, to }) => {
       const start = new Date(from[0],from[1],from[2]);
       const slut  = new Date(to[0],  to[1],  to[2]);
-      for (const d = new Date(start); d <= slut; d.setDate(d.getDate()+1))
-        result[datumNyckel(d.getFullYear(),d.getMonth(),d.getDate())] = namn;
+      for (const d = new Date(start); d <= slut; d.setDate(d.getDate()+1)) {
+        result[datumNyckel(d.getFullYear(),d.getMonth(),d.getDate())] = { namn, etikett };
+      }
     });
     return result;
   }
@@ -1462,7 +1484,7 @@
     vkStart.setDate(vkStart.getDate() - dagISV);
     const lov = lovNamnForVecka(vkStart, lovSet);
     if (lov) {
-      namnEl.textContent = lov;
+      namnEl.textContent = lov.etikett;
       banner.classList.remove('dold');
     } else {
       banner.classList.add('dold');
@@ -1529,7 +1551,7 @@
         if (lovNmn) vkCls += ' lov-vk';
         vkEl.className   = vkCls;
         vkEl.textContent = vk;
-        if (lovNmn) vkEl.title = lovNmn;
+        if (lovNmn) vkEl.title = lovNmn.etikett;
         grid.appendChild(vkEl);
       }
 
@@ -1551,7 +1573,7 @@
       const el = document.createElement('div');
       el.className   = cls;
       el.textContent = d;
-      const tips = [helgdag,lov].filter(Boolean);
+      const tips = [helgdag, lov && lov.etikett].filter(Boolean);
       if (tips.length) el.title = tips.join(' · ');
       grid.appendChild(el);
     });
@@ -1566,10 +1588,10 @@
         const nyckel = datumNyckel(cell.y, cell.m, cell.d);
         const lovNmn = lovSet[nyckel];
         if (!lovNmn) return;
-        if (!synligaLov.has(lovNmn)) {
-          synligaLov.set(lovNmn, { from: new Date(cell.y, cell.m, cell.d), to: new Date(cell.y, cell.m, cell.d) });
+        if (!synligaLov.has(lovNmn.etikett)) {
+          synligaLov.set(lovNmn.etikett, { from: new Date(cell.y, cell.m, cell.d), to: new Date(cell.y, cell.m, cell.d) });
         } else {
-          const e = synligaLov.get(lovNmn);
+          const e = synligaLov.get(lovNmn.etikett);
           const d2 = new Date(cell.y, cell.m, cell.d);
           if (d2 < e.from) e.from = d2;
           if (d2 > e.to)   e.to   = d2;
