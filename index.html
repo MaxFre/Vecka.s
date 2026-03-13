@@ -606,6 +606,9 @@
       display: grid;
       grid-template-columns: 2.65rem repeat(7, 1fr);
       gap: 3px;
+      /* Lock height to max 6-week month (header 2rem + 6×2.7rem + 6×3px gap) so arrows don't jump */
+      min-height: calc(2rem + 6 * 2.7rem + 6 * 3px);
+      align-content: start;
     }
 
     .cal-cell {
