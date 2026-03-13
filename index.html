@@ -998,7 +998,7 @@
       </div>
 
       <div class="kalender-hint">
-        <a href="#kalender">📅 Se kalender ↓</a>
+        <a href="#kalender" id="kalender-hint-btn">📅 Se kalender ↓</a>
       </div>
     </div>
 
@@ -1637,6 +1637,17 @@
   document.getElementById('cookie-ok').onclick=function(){localStorage.setItem('cookie-consent','accepted');gtag('consent','update',{'ad_storage':'granted','analytics_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});b.style.display='none';};
   document.getElementById('cookie-nej').onclick=function(){localStorage.setItem('cookie-consent','denied');b.style.display='none';};
 })();
+</script>
+<script>
+  // Strip #kalender hash on load so page refresh always starts at top
+  if (window.location.hash === '#kalender') {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  // Smooth scroll for "Se kalender" button
+  document.getElementById('kalender-hint-btn').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('kalender').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 </script>
 </body>
 </html>
