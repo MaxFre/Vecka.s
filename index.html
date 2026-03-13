@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://ipapi.co" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <!-- Preload seasonal LCP image before JS runs -->
-  <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='images/'+s+'.png';document.head.appendChild(l);})();</script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Preload seasonal LCP image with high priority -->
+  <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='/images/'+s+'.png';l.setAttribute('fetchpriority','high');document.head.insertBefore(l,document.head.firstChild);})();</script>
   <meta name="theme-color" content="#4f71f0" />
-  <title>Vilken vecka är det nu? – Veckonummer 2026 i Sverige | VilketVeckonummer.se</title>
-  <meta name="description" content="Vecka nu – vilket veckonummer är det idag 2026? Se aktuell vecka, kalender med röda dagar, skollov per län och alla svenska helgdagar. Uppdateras automatiskt – VilketVeckonummer.se." />
-  <meta name="keywords" content="vecka nu, vilken vecka är det nu, vilken vecka, vilken vecka är det, veckonummer, veckonummer 2026, aktuell vecka, vecka idag, kalender, skollov, röda dagar, Sverige, ISO 8601, midsommar 2026, sommarlov 2026, höstlov 2026, påsklov 2026, sportlov 2026, helgdagar 2026, hur många dagar kvar på året, hur många veckor kvar på året, dagar till jul, dagar till midsommar, nedräkning" />
+  <title>Vilken vecka är det nu? Vilket veckonummer? – 2026 | VilketVeckonummer.se</title>
+  <meta name="description" content="Vecka nu: se vilket veckonummer det är idag – uppdateras automatiskt. Vilken vecka är det? Vad är det för vecka? Kalender med röda dagar och skollov per län 2026." />
+  <meta name="keywords" content="vecka nu, vilken vecka är det nu, vilken vecka, vilken vecka är det, vilket veckonummer, vilket veckonummer är det nu, vilket är det, vad är det för vecka, veckonummer nu, veckonummer, veckonummer 2026, aktuell vecka, vecka idag, kalender, skollov, röda dagar, Sverige, ISO 8601, midsommar 2026, sommarlov 2026, höstlov 2026, påsklov 2026, sportlov 2026, helgdagar 2026, hur många dagar kvar på året, hur många veckor kvar på året, dagar till jul, dagar till midsommar, nedräkning" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="VilketVeckonummer.se" />
   <meta name="geo.region" content="SE" />
@@ -18,7 +18,7 @@
   <link rel="canonical" href="https://www.vilketveckonummer.se/" />
   <link rel="alternate" hreflang="sv" href="https://www.vilketveckonummer.se/" />
   <!-- Open Graph -->
-  <meta property="og:title" content="Vilken vecka är det nu? – VilketVeckonummer.se" />
+  <meta property="og:title" content="Vilken vecka är det nu? Vilket veckonummer? – VilketVeckonummer.se" />
   <meta property="og:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.vilketveckonummer.se/" />
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="VilketVeckonummer.se" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Vilken vecka är det nu? – VilketVeckonummer.se" />
+  <meta name="twitter:title" content="Vilken vecka är det nu? Vilket veckonummer? – VilketVeckonummer.se" />
   <meta name="twitter:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län i Sverige." />
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -46,7 +46,7 @@
         "@type": "WebPage",
         "@id": "https://www.vilketveckonummer.se/#webpage",
         "url": "https://www.vilketveckonummer.se/",
-        "name": "Vilken vecka är det nu? – Veckonummer 2026 i Sverige",
+        "name": "Vilken vecka är det nu? Vilket veckonummer? – 2026 i Sverige",
         "isPartOf": { "@id": "https://www.vilketveckonummer.se/#website" },
         "description": "Se vilket veckonummer det är idag 2026 i Sverige med kalender, röda dagar och skollov per län.",
         "datePublished": "2025-01-01",
@@ -69,6 +69,23 @@
               "@type": "Answer",
               "text": "Vecka nu visas direkt på startsidan hos VilketVeckonummer.se. Vilken vecka är det? Aktuellt veckonummer beräknas enligt ISO 8601 – den standard som används i Sverige och hela Norden. Veckan börjar på måndag och vecka 1 är alltid den vecka som innehåller årets första torsdag."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Vilket veckonummer är det nu?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Aktuellt veckonummer visas automatiskt på VilketVeckonummer.se. Vilket veckonummer är det? Veckonumret beräknas enligt ISO 8601 och uppdateras varje dag. Sverige använder veckonummer 1–53 där veckan börjar på måndag."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vad är det för vecka?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vad är det för vecka idag? Aktuell vecka och veckonummer visas direkt på VilketVeckonummer.se och uppdateras automatiskt varje dag enligt ISO 8601-standarden som gäller i Sverige."
+            }
+          }
           },
           {
             "@type": "Question",
@@ -949,10 +966,10 @@
 <header class="site-header">
   <a class="logo" href="/"><span style="font-weight:400">Vilket</span><span style="font-weight:900">Veckonummer</span><span style="font-weight:500">.se</span></a>
   <nav>
-    <a href="veckor/index.html">Alla veckor</a>
-    <a href="om-oss.html">Om sajten</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="integritetspolicy.html">Integritetspolicy</a>
+    <a href="/veckor/">Alla veckor</a>
+    <a href="/om-oss/">Om sajten</a>
+    <a href="/kontakt/">Kontakt</a>
+    <a href="/integritetspolicy/">Integritetspolicy</a>
   </nav>
 </header>
 
@@ -974,25 +991,25 @@
       <p class="vecka-siffra" id="vecka-siffra"></p>
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
-      <a href="veckor/index.html" class="alla-veckor-btn">Alla veckor</a>
+      <a href="/veckor/" class="alla-veckor-btn">Alla veckor</a>
 
       <div class="mini-stats">
-        <a class="mini-chip" href="hur-manga-dagar-kvar-pa-aret.html">
+        <a class="mini-chip" href="/hur-manga-dagar-kvar-pa-aret/">
           <span class="mini-chip-ikon">📅</span>
           <span class="mini-chip-tal" id="chip-dagar-kvar">–</span>
           <span class="mini-chip-text">dagar kvar<br>på året</span>
         </a>
-        <a class="mini-chip" href="hur-manga-veckor-kvar-pa-aret.html">
+        <a class="mini-chip" href="/hur-manga-veckor-kvar-pa-aret/">
           <span class="mini-chip-ikon">🗓️</span>
           <span class="mini-chip-tal" id="chip-veckor-kvar">–</span>
           <span class="mini-chip-text">veckor kvar<br>på året</span>
         </a>
-        <a class="mini-chip" href="hur-manga-dagar-till-midsommar.html">
+        <a class="mini-chip" href="/hur-manga-dagar-till-midsommar/">
           <span class="mini-chip-ikon">🌸</span>
           <span class="mini-chip-tal" id="chip-midsommar">–</span>
           <span class="mini-chip-text">dagar till<br>midsommar</span>
         </a>
-        <a class="mini-chip" href="hur-manga-dagar-till-jul.html">
+        <a class="mini-chip" href="/hur-manga-dagar-till-jul/">
           <span class="mini-chip-ikon">🎄</span>
           <span class="mini-chip-tal" id="chip-jul">–</span>
           <span class="mini-chip-text">dagar till<br>jul</span>
@@ -1072,43 +1089,43 @@
         Utöver verktyget för aktuell vecka har vi samlat guider för vanliga sökningar om veckonummer, röda dagar och sportlov i Sverige. De här sidorna är byggda för att ge snabb överblick och leda dig vidare till rätt vecka i kalendern.
       </div>
       <div class="trafik-grid">
-        <a class="trafik-kort" href="veckonummer-2026.html">
+        <a class="trafik-kort" href="/veckonummer-2026/">
           <strong>Veckonummer 2026</strong>
           <span>Se årets alla veckor, vecka 1, vecka 53 och hur ISO-veckor räknas.</span>
         </a>
-        <a class="trafik-kort" href="roda-dagar-2026.html">
+        <a class="trafik-kort" href="/roda-dagar-2026/">
           <strong>Röda dagar 2026</strong>
           <span>Lista över svenska helgdagar, långhelger och planeringstips.</span>
         </a>
-        <a class="trafik-kort" href="klamdagar-2026.html">
+        <a class="trafik-kort" href="/klamdagar-2026/">
           <strong>Klämdagar 2026</strong>
           <span>Maximera din ledighet – se vilka dagar du bör ta semester.</span>
         </a>
-        <a class="trafik-kort" href="pasklov-2026.html">
+        <a class="trafik-kort" href="/pasklov-2026/">
           <strong>Påsklov 2026</strong>
           <span>Vecka 14 – datum, röda dagar och planeringstips för påsklovet.</span>
         </a>
-        <a class="trafik-kort" href="sommarlov-2026.html">
+        <a class="trafik-kort" href="/sommarlov-2026/">
           <strong>Sommarlov 2026</strong>
           <span>Vecka 24–33 – när slutar och börjar skolan?</span>
         </a>
-        <a class="trafik-kort" href="sportlov-2026.html">
+        <a class="trafik-kort" href="/sportlov-2026/">
           <strong>Sportlov 2026</strong>
           <span>Översikt över sportlovsveckor i olika delar av Sverige.</span>
         </a>
-        <a class="trafik-kort" href="hur-manga-dagar-kvar-pa-aret.html">
+        <a class="trafik-kort" href="/hur-manga-dagar-kvar-pa-aret/">
           <strong>Dagar kvar på året</strong>
           <span>Hur många dagar återstår av 2026? Daglig nedräkning med årsöversikt.</span>
         </a>
-        <a class="trafik-kort" href="hur-manga-veckor-kvar-pa-aret.html">
+        <a class="trafik-kort" href="/hur-manga-veckor-kvar-pa-aret/">
           <strong>Veckor kvar på året</strong>
           <span>Aktuell vecka och hur många ISO-veckor som återstår av 2026.</span>
         </a>
-        <a class="trafik-kort" href="hur-manga-dagar-till-jul.html">
+        <a class="trafik-kort" href="/hur-manga-dagar-till-jul/">
           <strong>Dagar till jul</strong>
           <span>Nedräkning till julafton 24 december 2026.</span>
         </a>
-        <a class="trafik-kort" href="hur-manga-dagar-till-midsommar.html">
+        <a class="trafik-kort" href="/hur-manga-dagar-till-midsommar/">
           <strong>Dagar till midsommar</strong>
           <span>Nedräkning till midsommarafton fredag 19 juni 2026.</span>
         </a>
@@ -1122,6 +1139,16 @@
       <details class="faq-item">
         <summary>Vilken vecka är det nu?</summary>
         <p><strong>Vecka nu</strong> visas direkt i kortet högst upp på sidan. Vilken vecka är det? Aktuellt veckonummer beräknas automatiskt enligt ISO&nbsp;8601 – den standard som används i Sverige och hela Norden. Veckan börjar alltid på måndag.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vilket veckonummer är det nu?</summary>
+        <p>Aktuellt <strong>veckonummer nu</strong> visas automatiskt på den här sidan. Vilket veckonummer är det? Sverige använder ISO&nbsp;8601 – veckonummer 1–53, veckan börjar måndag. Veckonumret uppdateras varje dag utan att du behöver göra något.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vad är det för vecka?</summary>
+        <p>Vad är det för vecka idag? Aktuell vecka visas direkt i kortet ovan och uppdateras automatiskt. Veckonumret beräknas enligt ISO&nbsp;8601 – samma standard som används i hela Sverige och Norden.</p>
       </details>
 
       <details class="faq-item">
@@ -1176,12 +1203,12 @@
 
       <details class="faq-item">
         <summary>Vilka klämdagar finns 2026?</summary>
-        <p>De bästa klämdagarna 2026 är måndag 5 januari, dagarna runt påsk i april, fredagen 15 maj (efter Kristi himmelsfärdsdag), och dagarna runt jul/nyår i december. Läs mer i vår <a href="klamdagar-2026.html">guide till klämdagar 2026</a>.</p>
+        <p>De bästa klämdagarna 2026 är måndag 5 januari, dagarna runt påsk i april, fredagen 15 maj (efter Kristi himmelsfärdsdag), och dagarna runt jul/nyår i december. Läs mer i vår <a href="/klamdagar-2026/">guide till klämdagar 2026</a>.</p>
       </details>
 
       <details class="faq-item">
         <summary>När är sommarlovet 2026?</summary>
-        <p>Sommarlovet 2026 pågår ungefär från vecka <strong>24–25</strong> (mitten av juni) till vecka <strong>33–34</strong> (mitten av augusti). Läs mer i vår <a href="sommarlov-2026.html">guide till sommarlovet 2026</a>.</p>
+        <p>Sommarlovet 2026 pågår ungefär från vecka <strong>24–25</strong> (mitten av juni) till vecka <strong>33–34</strong> (mitten av augusti). Läs mer i vår <a href="/sommarlov-2026/">guide till sommarlovet 2026</a>.</p>
       </details>
     </section>
 
@@ -1190,13 +1217,13 @@
 
     <div class="sajt-footer">
       <nav>
-        <a href="veckor/index.html">Alla veckor</a>
-        <a href="klamdagar-2026.html">Klämdagar 2026</a>
-        <a href="pasklov-2026.html">Påsklov 2026</a>
-        <a href="sommarlov-2026.html">Sommarlov 2026</a>
-        <a href="om-oss.html">Om sajten</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="integritetspolicy.html">Integritetspolicy</a>
+        <a href="/veckor/">Alla veckor</a>
+        <a href="/klamdagar-2026/">Klämdagar 2026</a>
+        <a href="/pasklov-2026/">Påsklov 2026</a>
+        <a href="/sommarlov-2026/">Sommarlov 2026</a>
+        <a href="/om-oss/">Om sajten</a>
+        <a href="/kontakt/">Kontakt</a>
+        <a href="/integritetspolicy/">Integritetspolicy</a>
       </nav>
       <p>Lovdatum är ungefärliga och kan variera per kommun. &copy; <span id="ar"></span> VilketVeckonummer.se</p>
     </div>
@@ -1227,7 +1254,7 @@
       localStorage.setItem(MANAD, manaden);
 
     } catch (e) {}
-  })();
+  }, 0);
 
   // ── Hjälpfunktioner ──────────────────────────────────────
   function isoVecka(date) {
@@ -1607,25 +1634,23 @@
     return null;
   }
 
-  // Sätt sparat länsval synkront innan första render
-  const sparatLan = localStorage.getItem('valt-lan');
-  if (sparatLan) {
-    const sel = document.getElementById('lan');
-    if ([...sel.options].some(o => o.value === sparatLan)) {
-      sel.value = sparatLan;
+  // Lazy-init kalender när den scrollas in i bild
+  const kalEl = document.getElementById('kalender');
+  let kalInitierad = false;
+  function initKalender() {
+    if (kalInitierad) return;
+    kalInitierad = true;
+    // Sätt sparat länsval synkront innan första render
+    const sparatLan = localStorage.getItem('valt-lan');
+    if (sparatLan) {
+      const sel = document.getElementById('lan');
+      if ([...sel.options].some(o => o.value === sparatLan)) sel.value = sparatLan;
     }
-  }
-
-  document.getElementById('lan').addEventListener('change', () => {
-    localStorage.setItem('valt-lan', document.getElementById('lan').value);
-  });
-
-  // Rita sidan direkt – utan att vänta på API
-  ritar();
-
-  // Geolokalisera via API först efter att allt är laddat, och bara om inget är sparat
-  if (!sparatLan) {
-    window.addEventListener('load', () => {
+    document.getElementById('lan').addEventListener('change', () => {
+      localStorage.setItem('valt-lan', document.getElementById('lan').value);
+    });
+    ritar();
+    if (!sparatLan) {
       fetch('https://ipapi.co/json/')
         .then(r => r.json())
         .then(data => {
@@ -1638,7 +1663,14 @@
           ritar();
         })
         .catch(() => {});
-    });
+    }
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { obs.disconnect(); initKalender(); }
+    }, { rootMargin: '200px' }).observe(kalEl);
+  } else {
+    initKalender();
   }
 </script>
 <script>
@@ -1653,7 +1685,7 @@
 </script>
 <!-- Cookie-samtyckesbanner (GDPR) -->
 <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1e2250;color:#fff;padding:1rem 1.5rem;align-items:center;gap:0.75rem;flex-wrap:wrap;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.25);">
-  <p style="margin:0;font-size:0.84rem;flex:1 1 280px;line-height:1.5;">Vi använder cookies för att visa anpassade annonser via Google AdSense. Läs mer i vår <a href="integritetspolicy.html" style="color:#a78bfa;">integritetspolicy</a>.</p>
+  <p style="margin:0;font-size:0.84rem;flex:1 1 280px;line-height:1.5;">Vi använder cookies för att visa anpassade annonser via Google AdSense. Läs mer i vår <a href="/integritetspolicy/" style="color:#a78bfa;">integritetspolicy</a>.</p>
   <div style="display:flex;gap:0.5rem;flex-shrink:0;">
     <button id="cookie-ok" style="background:linear-gradient(135deg,#4f71f0,#a78bfa);border:none;color:#fff;padding:0.5rem 1.25rem;border-radius:0.5rem;font-weight:700;cursor:pointer;font-size:0.85rem;">Acceptera</button>
     <button id="cookie-nej" style="background:transparent;border:1.5px solid rgba(255,255,255,0.35);color:#fff;padding:0.5rem 0.9rem;border-radius:0.5rem;font-weight:600;cursor:pointer;font-size:0.85rem;">Avvisa</button>
