@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://ipapi.co" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <!-- Preload seasonal LCP image before JS runs -->
+  <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='images/'+s+'.png';document.head.appendChild(l);})();</script>
   <meta name="theme-color" content="#4f71f0" />
   <title>Vilken vecka är det nu? – Veckonummer 2026 i Sverige | VilketVeckonummer.se</title>
   <meta name="description" content="Vecka nu – vilket veckonummer är det idag 2026? Se aktuell vecka, kalender med röda dagar, skollov per län och alla svenska helgdagar. Uppdateras automatiskt – VilketVeckonummer.se." />
@@ -942,7 +944,7 @@
 <body>
 
 <!-- Helsides säsongsbakgrund -->
-<div id="pg-bg"><img id="pg-bg-img" alt="" /></div>
+<div id="pg-bg"><img id="pg-bg-img" alt="" fetchpriority="high" decoding="async" /></div>
 
 <header class="site-header">
   <a class="logo" href="/"><span style="font-weight:400">Vilket</span><span style="font-weight:900">Veckonummer</span><span style="font-weight:500">.se</span></a>
@@ -966,7 +968,7 @@
     <!-- Veckokortet -->
     <div class="card">
       <div class="sasong-bild">
-        <img id="sasong-img" alt="" />
+        <img id="sasong-img" alt="" decoding="async" fetchpriority="high" />
       </div>
       <h1 class="vecka-etikett">Vecka</h1>
       <p class="vecka-siffra" id="vecka-siffra"></p>
