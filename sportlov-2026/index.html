@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Preload seasonal LCP image with high priority -->
+  <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='/images/'+s+'.png';l.setAttribute('fetchpriority','high');document.head.insertBefore(l,document.head.firstChild);})();</script>
   <title>Sportlov 2026 – Vilken vecka är sportlovet? | VilketVeckonummer.se</title>
   <meta name="description" content="Se vilka veckor sportlovet 2026 infaller i Sverige. Översikt över sportlov vecka 7, 8, 9 och 10 per län med länkar till kalender och veckonummer." />
   <meta name="robots" content="index, follow" />
@@ -12,40 +14,56 @@
   <meta property="og:title" content="Sportlov 2026 – Vilken vecka är sportlovet?" />
   <meta property="og:description" content="Översikt över sportlov 2026 i Sverige med vanliga sportlovsveckor och praktiska länkar vidare." />
   <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://www.vilketveckonummer.se/images/spring.png" />
   <meta property="og:url" content="https://www.vilketveckonummer.se/sportlov-2026/" />
   <meta property="og:locale" content="sv_SE" />
   <meta property="og:site_name" content="VilketVeckonummer.se" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sportlov 2026 – Vilken vecka är sportlovet?" />
+  <meta name="twitter:description" content="Översikt över sportlov 2026 i Sverige med vanliga sportlovsveckor och praktiska länkar vidare." />
+  <meta name="twitter:image" content="https://www.vilketveckonummer.se/images/spring.png" />
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        "headline": "Sportlov 2026 – vilken vecka är sportlovet?",
-        "description": "Guide till sportlov 2026 med sportlovsveckor per län i Sverige.",
-        "datePublished": "2026-03-09",
-        "dateModified": "2026-03-09",
-        "inLanguage": "sv-SE",
-        "mainEntityOfPage": "https://www.vilketveckonummer.se/sportlov-2026/",
-        "author": { "@type": "Organization", "name": "VilketVeckonummer.se" },
-        "publisher": { "@type": "Organization", "name": "VilketVeckonummer.se" }
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Sportlov 2026 – vilken vecka är sportlovet?",
+      "description": "Guide till sportlov 2026 med sportlovsveckor per län i Sverige.",
+      "datePublished": "2026-03-09",
+      "dateModified": "2026-03-09",
+      "inLanguage": "sv-SE",
+      "mainEntityOfPage": "https://www.vilketveckonummer.se/sportlov-2026/",
+      "author": {
+        "@type": "Organization",
+        "name": "VilketVeckonummer.se"
       },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Vilken vecka är sportlovet 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sportlovet 2026 ligger under vecka 7, 8, 9 eller 10 beroende på län. Vecka 7 gäller Västra Götalands och Jönköpings län, vecka 8 gäller bland annat Uppsala och södra Sverige, vecka 9 gäller Stockholm och flera län i Mellansverige, och vecka 10 gäller Norrbotten, Västerbotten, Västernorrland och Jämtland."
-            }
-          }
-        ]
+      "publisher": {
+        "@type": "Organization",
+        "name": "VilketVeckonummer.se"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.vilketveckonummer.se/images/spring.png",
+        "width": 1200,
+        "height": 630
       }
-    ]
-  }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Vilken vecka är sportlovet 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sportlovet 2026 ligger under vecka 7, 8, 9 eller 10 beroende på län. Vecka 7 gäller Västra Götalands och Jönköpings län, vecka 8 gäller bland annat Uppsala och södra Sverige, vecka 9 gäller Stockholm och flera län i Mellansverige, och vecka 10 gäller Norrbotten, Västerbotten, Västernorrland och Jämtland."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
   <style>
     :root {

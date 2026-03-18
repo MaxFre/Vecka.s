@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Preload seasonal LCP image with high priority -->
+  <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='/images/'+s+'.png';l.setAttribute('fetchpriority','high');document.head.insertBefore(l,document.head.firstChild);})();</script>
   <title>Om sajten – VilketVeckonummer.se</title>
   <meta name="description" content="Om VilketVeckonummer.se – en snabb och enkel sajt för att se aktuellt veckonummer, kalender med röda dagar och skollov per län i Sverige." />
   <meta name="robots" content="index, follow" />
@@ -13,10 +15,12 @@
   <meta property="og:title" content="Om VilketVeckonummer.se" />
   <meta property="og:description" content="Läs om VilketVeckonummer.se – gratis veckonummer, kalender med röda dagar och skollov för alla svenska län." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.vilketveckonummer.se/images/spring.png" />
   <meta property="og:url" content="https://www.vilketveckonummer.se/om-oss/" />
   <meta property="og:locale" content="sv_SE" />
   <meta property="og:site_name" content="VilketVeckonummer.se" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.vilketveckonummer.se/images/spring.png" />
   <meta name="twitter:title" content="Om VilketVeckonummer.se" />
   <meta name="twitter:description" content="Gratis veckonummer, kalender med röda dagar och skollov för alla svenska län." />
   <script type="application/ld+json">
