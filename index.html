@@ -1792,25 +1792,21 @@
     });
     ritar();
     if (!sparatLan) {
-      // GDPR: only auto-detect county on explicit user interaction with the dropdown
-      const sel = document.getElementById('lan');
-      function autoDetectLan() {
-        sel.removeEventListener('focus', autoDetectLan);
-        fetch('https://ipapi.co/json/')
-          .then(r => r.json())
-          .then(data => {
-            if (data.country_code !== 'SE') return;
-            const lan = matchaLan(data.region || '');
-            if (!lan) return;
-            if (!localStorage.getItem('valt-lan')) {
-              sel.value = lan;
-              localStorage.setItem('valt-lan', lan);
-              ritar();
-            }
-          })
-          .catch(() => {});
-      }
-      sel.addEventListener('focus', autoDetectLan);
+      // Functional geo-lookup (legitimate interests, not advertising) – no consent required
+      fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(data => {
+          if (data.country_code !== 'SE') return;
+          const lan = matchaLan(data.region || '');
+          if (!lan) return;
+          if (!localStorage.getItem('valt-lan')) {
+            const sel = document.getElementById('lan');
+            sel.value = lan;
+            localStorage.setItem('valt-lan', lan);
+            ritar();
+          }
+        })
+        .catch(() => {});
     }
   }
   if ('IntersectionObserver' in window) {
