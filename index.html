@@ -116,7 +116,7 @@
             "name": "Vilka är Sveriges röda dagar?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sveriges officiella helgdagar är: Nyårsdagen (1 jan), Trettondedag jul (6 jan), Långfredag, Påskdagen, Annandag påsk, Kristi himmelsfärdsdag, Pingstdagen, Nationaldagen (6 jun), Midsommardagen, Alla helgons dag, Juldagen (25 dec) och Annandag jul (26 dec)."
+              "text": "Sveriges officiella helgdagar är: Nyårsdagen (1 jan), Trettondedag jul (6 jan), Långfredag, Påskdagen, Annandag påsk, Första maj (1 maj), Kristi himmelsfärdsdag, Pingstdagen, Nationaldagen (6 jun), Midsommardagen, Alla helgons dag, Juldagen (25 dec) och Annandag jul (26 dec)."
             }
           },
           {
@@ -1012,7 +1012,7 @@
       <div class="sasong-bild">
         <img id="sasong-img" alt="" decoding="async" fetchpriority="high" />
       </div>
-      <h1 class="vecka-etikett">Vecka</h1>
+      <h1 class="vecka-etikett">Vilken vecka är det nu?</h1>
       <p class="vecka-siffra" id="vecka-siffra"></p>
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
@@ -1276,11 +1276,6 @@
       <details class="faq-item">
         <summary>När är sommarlovet 2026?</summary>
         <p>Sommarlovet 2026 pågår ungefär från vecka <strong>24–25</strong> (mitten av juni) till vecka <strong>33–34</strong> (mitten av augusti). Läs mer i vår <a href="/sommarlov-2026/">guide till sommarlovet 2026</a>.</p>
-      </details>
-
-      <details class="faq-item">
-        <summary>Höstlov 2026 – vilken vecka?</summary>
-        <p>Höstlovet 2026 infaller i <strong>vecka 44</strong> – måndag 26 oktober till fredag 30 oktober. Alla helgons dag (röd dag) är lördagen 31 oktober direkt efter lovet. Läs mer i vår <a href="/hostlov-2026/">guide till höstlovet 2026</a>.</p>
       </details>
 
       <details class="faq-item">
@@ -1786,18 +1781,25 @@
     });
     ritar();
     if (!sparatLan) {
-      fetch('https://ipapi.co/json/')
-        .then(r => r.json())
-        .then(data => {
-          if (data.country_code !== 'SE') return;
-          const lan = matchaLan(data.region || '');
-          if (!lan) return;
-          const sel = document.getElementById('lan');
-          sel.value = lan;
-          localStorage.setItem('valt-lan', lan);
-          ritar();
-        })
-        .catch(() => {});
+      // GDPR: only auto-detect county on explicit user interaction with the dropdown
+      const sel = document.getElementById('lan');
+      function autoDetectLan() {
+        sel.removeEventListener('focus', autoDetectLan);
+        fetch('https://ipapi.co/json/')
+          .then(r => r.json())
+          .then(data => {
+            if (data.country_code !== 'SE') return;
+            const lan = matchaLan(data.region || '');
+            if (!lan) return;
+            if (!localStorage.getItem('valt-lan')) {
+              sel.value = lan;
+              localStorage.setItem('valt-lan', lan);
+              ritar();
+            }
+          })
+          .catch(() => {});
+      }
+      sel.addEventListener('focus', autoDetectLan);
     }
   }
   if ('IntersectionObserver' in window) {
