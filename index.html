@@ -834,6 +834,17 @@
       color: var(--muted);
     }
 
+    /* Skärmläsar-only (SEO-text dold visuellt) */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* förklaring */
     .forklaring {
       margin-top: 1rem;
@@ -1012,7 +1023,7 @@
       <div class="sasong-bild">
         <img id="sasong-img" alt="" decoding="async" fetchpriority="high" />
       </div>
-      <h1 class="vecka-etikett">Vilken vecka är det nu?</h1>
+      <h1 class="vecka-etikett"><span class="sr-only">Vilken vecka är det nu? – </span>Vecka</h1>
       <p class="vecka-siffra" id="vecka-siffra"></p>
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
