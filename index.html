@@ -1492,20 +1492,51 @@
     uppsala:{ from:[2026,1,16], to:[2026,1,20], vecka:'v8' },
   };
 
+  const SPORTLOV_2027_PER_LAN = {
+    norrbotten:{ from:[2027,2,8],  to:[2027,2,12], vecka:'v10' },
+    vasterbotten:{ from:[2027,2,8],  to:[2027,2,12], vecka:'v10' },
+    vasternorrland:{ from:[2027,2,8],  to:[2027,2,12], vecka:'v10' },
+    jamtland:{ from:[2027,2,8],  to:[2027,2,12], vecka:'v10' },
+    gavleborg:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    dalarna:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    varmland:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    vastmanland:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    stockholm:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    gotland:{ from:[2027,2,1], to:[2027,2,5], vecka:'v9' },
+    orebro:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    sodermanland:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    ostergotland:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    kalmar:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    blekinge:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    kronoberg:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    skane:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    halland:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+    jonkoping:{ from:[2027,1,15], to:[2027,1,19], vecka:'v7' },
+    vastragotaland:{ from:[2027,1,15], to:[2027,1,19], vecka:'v7' },
+    uppsala:{ from:[2027,1,22], to:[2027,1,26], vecka:'v8' },
+  };
+
   const GEMENSAMMA_LOV = [
     { namn:'Höstlov 2025', etikett:'Höstlov 2025 (kommunberoende)', from:[2025,9,27], to:[2025,9,31] },
     { namn:'Jullov 2025–2026', etikett:'Jullov 2025–2026 (kommunberoende)', from:[2025,11,20], to:[2026,0,7] },
     { namn:'Påsklov 2026', etikett:'Påsklov 2026 (kommunberoende)', from:[2026,2,30], to:[2026,3,6] },
     { namn:'Sommarlov 2026', etikett:'Sommarlov 2026 (kommunberoende)', from:[2026,5,11], to:[2026,7,16] },
     { namn:'Höstlov 2026', etikett:'Höstlov 2026 (vanligt vecka 44)', from:[2026,9,26], to:[2026,9,30] },
+    { namn:'Jullov 2026–2027', etikett:'Jullov 2026–2027 (kommunberoende)', from:[2026,11,22], to:[2027,0,8] },
+    { namn:'Påsklov 2027', etikett:'Påsklov 2027 (kommunberoende)', from:[2027,2,22], to:[2027,2,29] },
+    { namn:'Sommarlov 2027', etikett:'Sommarlov 2027 (kommunberoende)', from:[2027,5,10], to:[2027,7,15] },
+    { namn:'Höstlov 2027', etikett:'Höstlov 2027 (vanligt vecka 44)', from:[2027,10,1], to:[2027,10,5] },
+    { namn:'Jullov 2027–2028', etikett:'Jullov 2027–2028 (kommunberoende)', from:[2027,11,22], to:[2028,0,9] },
   ];
 
   function lovPerioderForLan(lansNyckel) {
-    const sport = SPORTLOV_PER_LAN[lansNyckel];
-    if (!sport) return [];
+    const sport2026 = SPORTLOV_PER_LAN[lansNyckel];
+    const sport2027 = SPORTLOV_2027_PER_LAN[lansNyckel];
+    if (!sport2026 && !sport2027) return [];
     return [
       ...GEMENSAMMA_LOV,
-      { namn:'Sportlov 2026', etikett:`Sportlov 2026 (${sport.vecka})`, from:sport.from, to:sport.to },
+      ...(sport2026 ? [{ namn:'Sportlov 2026', etikett:`Sportlov 2026 (${sport2026.vecka})`, from:sport2026.from, to:sport2026.to }] : []),
+      ...(sport2027 ? [{ namn:'Sportlov 2027', etikett:`Sportlov 2027 (${sport2027.vecka})`, from:sport2027.from, to:sport2027.to }] : []),
     ];
   }
 
