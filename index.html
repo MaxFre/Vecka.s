@@ -8,8 +8,8 @@
   <!-- Preload seasonal LCP image with high priority -->
   <script>(function(){var m=new Date().getMonth();var s=m<=1||m===11?'vinter':m<=4?'spring':m<=7?'summer':'fall';var l=document.createElement('link');l.rel='preload';l.as='image';l.href='/images/'+s+'.png';l.setAttribute('fetchpriority','high');document.head.insertBefore(l,document.head.firstChild);})();</script>
   <meta name="theme-color" content="#4f71f0" />
-  <title>Vilken vecka är det nu? Vilket veckonummer? – 2026 | VilketVeckonummer.se</title>
-  <meta name="description" content="Vecka nu: se vilket veckonummer det är idag – uppdateras automatiskt. Vilken vecka är det? Vad är det för vecka? Kalender med röda dagar och skollov per län 2026." />
+  <title>Vecka nu 2026 – Vilken vecka är det idag? | VilketVeckonummer.se</title>
+  <meta name="description" content="Vecka nu i Sverige: se vilket veckonummer det är idag enligt ISO 8601. Kalender 2026 med veckonummer, röda dagar, skollov per län och nedräkningar." />
   <meta name="keywords" content="vecka nu, vilken vecka är det nu, vilken vecka, vilken vecka är det, vilket veckonummer, vilket veckonummer är det nu, vilket är det, vad är det för vecka, veckonummer nu, veckonummer, veckonummer 2026, aktuell vecka, vecka idag, kalender, skollov, röda dagar, Sverige, ISO 8601, midsommar 2026, sommarlov 2026, höstlov 2026, påsklov 2026, sportlov 2026, helgdagar 2026, hur många dagar kvar på året, hur många veckor kvar på året, dagar till jul, dagar till midsommar, nedräkning, dagar till påsk, kristi himmelsfärd 2026, pingst 2026, nationaldagen 2026, alla helgons dag 2026, skolstart 2026, skolavslutning 2026" />
   <meta name="msvalidate.01" content="A1242DABF4482A419F0305DE9C2DAD0D" />
   <meta name="robots" content="index, follow" />
@@ -30,6 +30,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Vilken vecka är det nu? Vilket veckonummer? – VilketVeckonummer.se" />
   <meta name="twitter:description" content="Se aktuellt veckonummer, kalender med röda dagar och skollov för ditt län i Sverige." />
+  <meta name="twitter:image" content="https://www.vilketveckonummer.se/images/spring.png" />
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -51,7 +52,7 @@
         "isPartOf": { "@id": "https://www.vilketveckonummer.se/#website" },
         "description": "Se vilket veckonummer det är idag 2026 i Sverige med kalender, röda dagar och skollov per län.",
         "datePublished": "2025-01-01",
-        "dateModified": "2026-03-31",
+        "dateModified": "2026-08-31",
         "inLanguage": "sv-SE",
         "breadcrumb": {
           "@type": "BreadcrumbList",
@@ -85,6 +86,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Vad är det för vecka idag? Aktuell vecka och veckonummer visas direkt på VilketVeckonummer.se och uppdateras automatiskt varje dag enligt ISO 8601-standarden som gäller i Sverige."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vilken vecka är det idag?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vilken vecka är det idag? VilketVeckonummer.se visar aktuell vecka direkt på startsidan. Veckonumret räknas enligt ISO 8601, där veckan börjar på måndag och vecka 1 är veckan med årets första torsdag."
             }
           },
           {
@@ -508,6 +517,33 @@
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(4px); }
     }
+
+    /* ── Snabbsvar för sökmotorer och besökare ── */
+    .snabb-svar {
+      width: 100%;
+      max-width: 552px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem 1.15rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      animation: fade-up 0.6s 0.05s cubic-bezier(.22,1,.36,1) both;
+    }
+    .snabb-svar h2 {
+      margin-bottom: 0.35rem;
+      color: var(--text);
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+    .snabb-svar p + p { margin-top: 0.55rem; }
+    .snabb-svar a {
+      color: var(--accent1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .snabb-svar a:hover { text-decoration: underline; }
 
     /* ── Annonsband (mellanrum) ── */
     .annons-mellan {
@@ -1061,6 +1097,12 @@
         <a href="#kalender" id="kalender-hint-btn">📅 Se kalender ↓</a>
       </div>
     </div>
+
+    <section class="snabb-svar" aria-labelledby="snabb-svar-rubrik">
+      <h2 id="snabb-svar-rubrik">Vecka nu och veckonummer idag</h2>
+      <p><strong>Vilken vecka är det idag?</strong> Veckonumret högst upp på sidan uppdateras automatiskt varje dag enligt ISO&nbsp;8601, den svenska standarden där veckan börjar på måndag.</p>
+      <p>Använd kalendern för att se veckonummer 2026 månad för månad, röda dagar, skollov i valt län och snabba svar på vanliga sökningar som <a href="/veckonummer-2026/">veckonummer 2026</a>, <a href="/roda-dagar-2026/">röda dagar 2026</a> och <a href="/sportlov-2026/">sportlov 2026</a>.</p>
+    </section>
 
     <!-- Annonsband (lägg till slot-ID efter godkännande) -->
     <div class="annons-mellan">
