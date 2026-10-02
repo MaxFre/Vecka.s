@@ -1063,7 +1063,7 @@
       <p class="vecka-siffra" id="vecka-siffra"></p>
       <p class="vecka-datum"  id="vecka-datum"></p>
       <p class="vecka-lov-banner dold" id="vecka-lov-banner">🎉 <span id="vecka-lov-namn"></span></p>
-      <a href="/veckor/" class="alla-veckor-btn">Alla veckor</a>
+      <a href="/veckor/" class="alla-veckor-btn" id="alla-veckor-btn">Alla veckor</a>
 
       <div class="mini-stats">
         <a class="mini-chip" href="/hur-manga-dagar-kvar-pa-aret/">
@@ -1607,6 +1607,9 @@
       `${DAGNAMN[nu.getDay()]} ${idag.d} ${MANADNAMN[idag.m]} ${idag.y}`;
 
     const vecka = isoVecka(nu);
+    const veckaAr = isoVeckaAr(nu);
+    const allaVeckorBtn = document.getElementById('alla-veckor-btn');
+    if (allaVeckorBtn) allaVeckorBtn.href = `/veckor/?v=${vecka}&ar=${veckaAr}`;
     let bildNamn;
     if (vecka === easterVecka(idag.y))         bildNamn = 'easter';
     else if (vecka === midsommarVecka(idag.y)) bildNamn = 'midsummer';

@@ -79,6 +79,12 @@
     }
     .vecko-kort:hover { box-shadow:0 6px 24px rgba(79,113,240,0.16); transform:translateY(-2px); }
     .vecko-kort.nu { border-color:var(--accent1); box-shadow:0 0 0 2px rgba(79,113,240,0.18); }
+    .vecko-kort.mal { animation: mal-pulse 1.6s ease-out 2; }
+    @keyframes mal-pulse {
+      0%   { box-shadow:0 0 0 0 rgba(79,113,240,0.45); }
+      70%  { box-shadow:0 0 0 10px rgba(79,113,240,0); }
+      100% { box-shadow:0 0 0 0 rgba(79,113,240,0); }
+    }
     .vecko-kort-topp { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:0.25rem; }
     .vecko-nr { font-size:1.5rem; font-weight:900; background:var(--today-bg); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
     .vecko-ar { font-size:0.7rem; color:var(--faded); font-weight:700; }
@@ -201,8 +207,14 @@
 
   document.getElementById('ar-footer').textContent = nu.getFullYear();
 
+  // Hoppa till en viss vecka via ?v=40&ar=2026 (t.ex. från "Alla veckor"-knappen)
+  const sokParams = new URLSearchParams(location.search);
+  const malVk = parseInt(sokParams.get('v'), 10);
+  const malAr = parseInt(sokParams.get('ar'), 10);
+  const harMal = !isNaN(malVk) && !isNaN(malAr);
+
   const arenArr = [nu.getFullYear()-1, nu.getFullYear(), nu.getFullYear()+1];
-  let valdAr = nu.getFullYear();
+  let valdAr = (harMal && arenArr.includes(malAr)) ? malAr : nu.getFullYear();
 
   const flikar = document.getElementById('ar-flikar');
   const grid   = document.getElementById('vecko-grid');
@@ -231,6 +243,7 @@
       const erNu = v.vk===nuVk && v.ar===nuVkAr;
       const a = document.createElement('a');
       a.className = 'vecko-kort' + (erNu?' nu':'');
+      a.id = `v${v.vk}-${v.ar}`;
       a.href = `../?v=${v.vk}&ar=${v.ar}`;
       a.title = `Vecka ${v.vk}, ${v.ar}`;
 
@@ -249,6 +262,14 @@
       a.innerHTML = html;
       grid.appendChild(a);
     });
+
+    if (harMal && valdAr === malAr) {
+      const malKort = document.getElementById(`v${malVk}-${malAr}`);
+      if (malKort) {
+        malKort.classList.add('mal');
+        malKort.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
   }
 
   renderVeckor();
